@@ -37,7 +37,7 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>poker.App</mainClass>
+          <mainClass>poker.Main</mainClass>
           <cleanupDaemonThreads>false</cleanupDaemonThreads>
         </configuration>
       </plugin> 

@@ -5,23 +5,15 @@ public class Card {
     private int value;
 
     /**
-     * default constructor
-     */
-    public Card() {
-        this.value = 0;
-    }
-
-    /**
-     * override constructor
+     * entry between 2 and 14 (error otherwise)
      * 
      * @param value
+     * @throws Exception
      */
-    public Card(int value) {
+    public Card(int value) throws Exception {
         this.value = value;
-        if (!this.Check()) {
-            System.out.println("Erreur lors de la saisie");
-            System.out.println("Veuillez ressaisir la main ");
-            value = 0;
+        if (!this.isCardCorrect()) {
+            throw new Exception("Erreur lors de la saisie");
         }
     }
 
@@ -33,11 +25,11 @@ public class Card {
     }
 
     /**
-     * Check if the entry is correct
+     * isCardCorrrect if the entry is correct
      * 
      * @return true if it's correct, false otherwise
      */
-    public boolean Check() {
-        return this.value < 2 || this.value < 14;
+    public boolean isCardCorrect() {
+        return 2 <= this.value && this.value <= 14;
     }
 }

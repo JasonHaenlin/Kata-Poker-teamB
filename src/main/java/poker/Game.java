@@ -11,6 +11,7 @@ public class Game {
         List<Hand> player = new ArrayList<>();
         player.add(new Hand(1));
         player.add(new Hand(2));
+        Referee Referee = new Referee();
 
         for (Hand hand : player) {
             while (!hand.buildNewHand(readEntry(hand.getHandNumber())))
@@ -18,21 +19,13 @@ public class Game {
         }
 
         // <temporary!!>
-        int main1 = player.get(0).getHand().get(0).getValue();
-        int main2 = player.get(1).getHand().get(0).getValue();
+        Card cardInHand1 = player.get(0).getHand().get(0);
+        Card cardInHand2 = player.get(1).getHand().get(0);
 
-        if (2 <= main1 && main1 <= 14 && 2 <= main2 && main2 <= 14) {
-            if (main1 < main2) {
-                System.out.println("La main N°2 est meilleur");
-            } else if (main1 > main2) {
-                System.out.println("La main N°1 est meilleur");
-            } else {
-                System.out.println(" Egalité !");
-            }
-        } else {
-            System.out.println("Une des mains est impossible !");
-        }
+        Referee.winner(cardInHand1,cardInHand2);
         // </temporary!!>
+
+
     }
 
     public static int readEntry(int player) {

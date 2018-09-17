@@ -14,7 +14,7 @@ public class Hand {
     }
 
     /***
-     * create a new hand of card.s
+     * create a new hand of cards
      * 
      * @return false if the entry is wrong, true otherwise
      */

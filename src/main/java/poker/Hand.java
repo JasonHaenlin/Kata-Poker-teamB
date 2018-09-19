@@ -6,7 +6,7 @@ import java.util.List;
 public class Hand {
 
     // Instantiate an arrayList of type Card
-    private List<Card> hand = new ArrayList<>();
+    private List<Card> hand;
     int handNumber;
 
     public Hand(int handNumber) {
@@ -19,6 +19,7 @@ public class Hand {
      * @return false if the entry is wrong, true otherwise
      */
     public boolean buildNewHand(List<String> listCard) {
+        hand = new ArrayList<>();
         for (String card : listCard) {
             try {
                 hand.add(new Card(Integer.parseInt(card)));

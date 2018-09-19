@@ -15,15 +15,17 @@ public class Hand {
 
     /***
      * create a new hand of cards
-     * 
+     *
      * @return false if the entry is wrong, true otherwise
      */
-    public boolean buildNewHand(int card) {
-        try {
-            hand.add(new Card(card));
-        } catch (Exception e) {
-            System.out.println(e);
-            return false;
+    public boolean buildNewHand(List<String> listCard) {
+        for (String card : listCard) {
+            try {
+                hand.add(new Card(Integer.parseInt(card)));
+            } catch (Exception e) {
+                System.out.println(e);
+                return false;
+            }
         }
         return true;
     }
@@ -45,7 +47,7 @@ public class Hand {
     /**
      * retrieve the value of the higher card right now just the first value is
      * retrieve
-     * 
+     *
      * @return
      */
     public int handCardValue() {

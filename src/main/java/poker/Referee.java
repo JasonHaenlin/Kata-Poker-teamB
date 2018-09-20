@@ -1,17 +1,15 @@
 package poker;
 
-public class Referee {
-	public Referee() {
-	}
-
+class Referee {
 
 	/**
 	 * Determines which hand wins
+	 * 
 	 * @param card1
 	 * @param card2
 	 * @return an int corresponding to the winner's handnumber
 	 */
-	int winner(Card card1, Card card2){
+	int winner(Card card1, Card card2) {
 		int value1 = card1.getValue();
 		int value2 = card2.getValue();
 		if (value1 < value2) {
@@ -24,7 +22,6 @@ public class Referee {
 			System.out.println(" Egalité !");
 			return 0;
 		}
-
 
 	}
 

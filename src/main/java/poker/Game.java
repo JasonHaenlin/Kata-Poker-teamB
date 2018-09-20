@@ -14,7 +14,6 @@ public class Game {
         player.add(new Hand(2));
         Referee Referee = new Referee();
 
-
         for (Hand hand : player) {
             while (!hand.buildNewHand(readEntry(hand.getHandNumber())))
                 ;
@@ -24,9 +23,8 @@ public class Game {
         Card cardInHand1 = player.get(0).getHand().get(0);
         Card cardInHand2 = player.get(1).getHand().get(0);
 
-        Referee.winner(cardInHand1,cardInHand2);
+        Referee.winner(cardInHand1, cardInHand2);
         // </temporary!!>
-
 
     }
 

@@ -1,6 +1,6 @@
 package poker;
 
-public class Card {
+class Card {
 
     private int value;
 
@@ -10,7 +10,7 @@ public class Card {
      * @param value
      * @throws Exception
      */
-    public Card(int value) throws Exception {
+    Card(int value) throws Exception {
         this.value = value;
         if (!this.isCardCorrect()) {
             throw new Exception("Erreur lors de la saisie");
@@ -20,7 +20,7 @@ public class Card {
     /**
      * @return the value
      */
-    public int getValue() {
+    int getValue() {
         return value;
     }
 
@@ -29,7 +29,7 @@ public class Card {
      * 
      * @return true if it's correct, false otherwise
      */
-    public boolean isCardCorrect() {
+    boolean isCardCorrect() {
         return 2 <= this.value && this.value <= 14;
     }
 }

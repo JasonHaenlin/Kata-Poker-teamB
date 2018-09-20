@@ -3,13 +3,13 @@ package poker;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hand {
+class Hand {
 
     // Instantiate an arrayList of type Card
     private List<Card> hand;
     int handNumber;
 
-    public Hand(int handNumber) {
+    Hand(int handNumber) {
         this.handNumber = handNumber;
     }
 
@@ -18,7 +18,7 @@ public class Hand {
      *
      * @return false if the entry is wrong, true otherwise
      */
-    public boolean buildNewHand(List<String> listCard) {
+    boolean buildNewHand(List<String> listCard) {
         hand = new ArrayList<>();
         for (String card : listCard) {
             try {
@@ -34,14 +34,14 @@ public class Hand {
     /**
      * @return the hand
      */
-    public List<Card> getHand() {
+    List<Card> getHand() {
         return hand;
     }
 
     /**
      * @return the handNumber
      */
-    public int getHandNumber() {
+    int getHandNumber() {
         return handNumber;
     }
 
@@ -51,7 +51,7 @@ public class Hand {
      *
      * @return
      */
-    public int handCardValue() {
+    int handCardValue() {
         return this.getHand().get(0).getValue();
     }
 }

@@ -20,10 +20,10 @@ public class Game {
         }
 
         // <temporary!!>
-        Card cardInHand1 = player.get(0).getHand().get(0);
-        Card cardInHand2 = player.get(1).getHand().get(0);
+        Hand hand1 = player.get(0); //
+        Hand hand2 = player.get(1);
 
-        Referee.winner(cardInHand1, cardInHand2);
+        Referee.winner(hand1, hand2);
         // </temporary!!>
 
     }

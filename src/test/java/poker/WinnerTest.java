@@ -19,12 +19,12 @@ public class WinnerTest {
 
 		hand1.buildNewHand(new ArrayList<>(Arrays.asList("7")));
 		hand2.buildNewHand(new ArrayList<>(Arrays.asList("14")));
-		assertEquals(2, referee.winner(hand1.getHand().get(0), hand2.getHand().get(0))); // victoire de la main1
+		assertEquals(2, referee.winner(hand1, hand2)); // victoire de la main1
 
 		hand3.buildNewHand(new ArrayList<>(Arrays.asList("12")));
 		hand4.buildNewHand(new ArrayList<>(Arrays.asList("3")));
-		assertEquals(1, referee.winner(hand3.getHand().get(0), hand4.getHand().get(0))); // victoire de la main2
+		assertEquals(1, referee.winner(hand3, hand4)); // victoire de la main2
 
-		assertEquals(0, referee.winner(hand1.getHand().get(0), hand1.getHand().get(0))); // égalité
+		assertEquals(0, referee.winner(hand1, hand1)); // égalité
 	}
 }

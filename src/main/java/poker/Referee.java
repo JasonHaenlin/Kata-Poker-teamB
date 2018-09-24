@@ -1,10 +1,5 @@
 package poker;
 
-import org.omg.CORBA.Object;
-
-import java.util.ArrayList;
-import java.util.Collections;
-
 class Referee {
 
 	/**
@@ -18,7 +13,6 @@ class Referee {
 		int value1 = hand1.handCardHightestValue();
 		int value2 = hand2.handCardHightestValue();
 
-
 		if (value1 < value2) {
 			System.out.println("La main 2 gagne avec la carte la plus élevée : " + value2);
 			return 2;
@@ -30,7 +24,5 @@ class Referee {
 			return 0;
 		}
 	}
-
-
 
 }

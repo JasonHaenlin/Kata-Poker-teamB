@@ -1,6 +1,5 @@
 package poker;
 
-
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -8,7 +7,7 @@ import java.util.TreeSet;
 class Hand {
 
     // Instantiate an arrayList of type Card
-    private SortedSet hand;
+    private SortedSet<Card> hand;
     int handNumber;
 
     Hand(int handNumber) {
@@ -21,7 +20,7 @@ class Hand {
      * @return false if the entry is wrong, true otherwise
      */
     boolean buildNewHand(List<String> listCard) {
-        hand = new TreeSet<>((Card c1,Card c2) -> Integer.compare(c1.getValue(),c2.getValue()));
+        hand = new TreeSet<>((Card c1, Card c2) -> Integer.compare(c1.getValue(), c2.getValue()));
         for (String card : listCard) {
             try {
                 hand.add(new Card(Integer.parseInt(card)));

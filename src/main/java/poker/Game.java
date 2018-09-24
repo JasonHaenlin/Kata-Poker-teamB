@@ -16,16 +16,15 @@ public class Game {
         Score gamescore = new Score();
 
         for (Hand hand : player) {
-            while (!hand.buildNewHand(readEntry(hand.getHandNumber())));
+            while (!hand.buildNewHand(readEntry(hand.getHandNumber())))
+                ;
 
         }
-        gamescore.scoring(player.get(0).getHand());
         // <temporary!!>
         Hand hand1 = player.get(0); //
         Hand hand2 = player.get(1);
 
         Referee.winner(hand1, hand2);
-
 
         // </temporary!!>
 

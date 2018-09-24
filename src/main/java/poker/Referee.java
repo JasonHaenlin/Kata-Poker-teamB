@@ -14,18 +14,10 @@ class Referee {
 	 * @param hand2
 	 * @return an int corresponding to the winner's handnumber
 	 */
-	int winner(Hand hand1, Hand hand2) { //Permet de detecter le gagnant à la carte haute
-		ArrayList<Integer> val1 = new ArrayList();	//Créer des listes qui vont contenir les valeurs
-		ArrayList<Integer> val2 = new ArrayList();	//des cartes des deux mains
+	int winner(Hand hand1, Hand hand2) {
+		int value1 = hand1.handCardHightestValue();
+		int value2 = hand2.handCardHightestValue();
 
-		for(int i = 0;i<5;i++)
-		{
-			val1.add(hand1.getHand().get(i).getValue());
-			val2.add(hand2.getHand().get(i).getValue());
-		}
-
-		int value1 = Collections.max(val1);	//Detecte le max des deux liste val1 et val2
-		int value2 = Collections.max(val2);
 
 		if (value1 < value2) {
 			System.out.println("La main 2 gagne avec la carte la plus élevée : " + value2);

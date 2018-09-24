@@ -1,12 +1,14 @@
 package poker;
 
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 class Hand {
 
     // Instantiate an arrayList of type Card
-    private List<Card> hand;
+    private SortedSet hand;
     int handNumber;
 
     Hand(int handNumber) {
@@ -19,7 +21,7 @@ class Hand {
      * @return false if the entry is wrong, true otherwise
      */
     boolean buildNewHand(List<String> listCard) {
-        hand = new ArrayList<>();
+        hand = new TreeSet<>((Card c1,Card c2) -> Integer.compare(c1.getValue(),c2.getValue()));
         for (String card : listCard) {
             try {
                 hand.add(new Card(Integer.parseInt(card)));
@@ -34,7 +36,7 @@ class Hand {
     /**
      * @return the hand
      */
-    List<Card> getHand() {
+    SortedSet<Card> getHand() {
         return hand;
     }
 
@@ -51,7 +53,7 @@ class Hand {
      *
      * @return
      */
-    int handCardValue() {
-        return this.getHand().get(0).getValue();
+    int handCardHightestValue() {
+        return this.getHand().last().getValue();
     }
 }

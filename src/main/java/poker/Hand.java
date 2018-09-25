@@ -1,6 +1,8 @@
 package poker;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -14,13 +16,13 @@ class Hand {
         this.handNumber = handNumber;
     }
 
-    /***
+    /**
      * create a new hand of cards
      *
      * @return false if the entry is wrong, true otherwise
      */
     boolean buildNewHand(List<String> listCard) {
-        if(!check(listCard)){
+        if (!check(listCard)) {
             System.out.println("Nombre incorrect de carte :");
             return false;
         }
@@ -62,7 +64,36 @@ class Hand {
     }
 
     boolean check(List<String> listCard) {
-        return listCard.size() ==5;
+        return listCard.size() == 5;
 
+    }
+
+    public int scoring() {
+
+        int score = 0;
+        Map<Integer, Integer> HandOccuration = new HashMap<>();
+
+        for (Card card : hand) {
+            int hs = card.getValue();
+
+            if (HandOccuration.containsKey(hs)) {
+                HandOccuration.put(hs, HandOccuration.get(hs) + 1);
+            } else {
+                HandOccuration.put(hs, 1);
+            }
+
+            switch (HandOccuration.get(hs)) {
+                case 2:
+                    score = 100 + hs;
+                    break;
+                case 3:
+                    score = 1000 + hs;
+                    break;
+                case 4:
+                    score = 10000 + hs;
+                    break;
+            }
+        }
+        return score;
     }
 }

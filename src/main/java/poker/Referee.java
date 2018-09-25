@@ -20,9 +20,8 @@ class Referee {
 			System.out.println("La main 1 gagne avec la carte la plus élevée : " + value1);
 			return 1;
 		} else {
-			System.out.println(" Egalité !");
+			System.out.println("Egalité !");
 			return 0;
 		}
 	}
-
 }

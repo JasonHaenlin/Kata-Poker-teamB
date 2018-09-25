@@ -17,13 +17,15 @@ public class Game {
         for (Hand hand : player) {
             while (!hand.buildNewHand(readEntry(hand.getHandNumber())))
                 ;
-        }
+            System.out.println(hand.scoring());
 
+        }
         // <temporary!!>
         Hand hand1 = player.get(0); //
         Hand hand2 = player.get(1);
 
         Referee.winner(hand1, hand2);
+
         // </temporary!!>
 
     }
@@ -33,4 +35,5 @@ public class Game {
         System.out.println("Joueur " + player + ": veuillez saisir une main");
         return new ArrayList<>(Arrays.asList(sc.nextLine().split(" ")));
     }
+
 }

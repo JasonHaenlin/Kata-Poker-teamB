@@ -20,6 +20,10 @@ class Hand {
      * @return false if the entry is wrong, true otherwise
      */
     boolean buildNewHand(List<String> listCard) {
+        if(!check(listCard)){
+            System.out.println("Nombre incorrect de carte :");
+            return false;
+        }
         hand = new TreeSet<>((Card c1, Card c2) -> Integer.compare(c1.getValue(), c2.getValue()));
         for (String card : listCard) {
             try {
@@ -30,6 +34,7 @@ class Hand {
             }
         }
         return true;
+
     }
 
     /**
@@ -54,5 +59,10 @@ class Hand {
      */
     int handCardHightestValue() {
         return this.getHand().last().getValue();
+    }
+
+    boolean check(List<String> listCard) {
+        return listCard.size() ==5;
+
     }
 }

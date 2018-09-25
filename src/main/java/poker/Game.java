@@ -20,7 +20,7 @@ public class Game {
         }
 
         // <temporary!!>
-        Hand hand1 = player.get(0); //
+        Hand hand1 = player.get(0);
         Hand hand2 = player.get(1);
 
         Referee.winner(hand1, hand2);

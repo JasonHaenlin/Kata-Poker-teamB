@@ -1,7 +1,9 @@
 package poker;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class Hand {
 
@@ -13,7 +15,7 @@ class Hand {
         this.handNumber = handNumber;
     }
 
-    /***
+    /**
      * create a new hand of cards
      *
      * @return false if the entry is wrong, true otherwise
@@ -54,4 +56,34 @@ class Hand {
     int handCardValue() {
         return this.getHand().get(0).getValue();
     }
+
+    public int scoring(){
+
+             int score = 0;
+            Map<Integer, Integer> HandOccuration = new HashMap<>();
+
+            for (Card card : hand) {
+                int hs = card.getValue();
+
+                if (HandOccuration.containsKey(hs)) {
+                    HandOccuration.put(hs, HandOccuration.get(hs) + 1);
+                } else {
+                    HandOccuration.put(hs, 1);
+                }
+
+                switch (HandOccuration.get(hs)) {
+                    case 2:
+                        score = 100 + hs;
+                        break;
+                    case 3:
+                        score = 1000 + hs;
+                        break;
+                    case 4:
+                        score = 10000 + hs;
+                        break;
+                }
+            }
+        return score;
+    }
+
 }

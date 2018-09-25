@@ -13,11 +13,11 @@ public class Game {
         player.add(new Hand(1));
         player.add(new Hand(2));
         Referee Referee = new Referee();
-        Score gamescore = new Score();
+
 
         for (Hand hand : player) {
-            while (!hand.buildNewHand(readEntry(hand.getHandNumber())))
-                ;
+            while (!hand.buildNewHand(readEntry(hand.getHandNumber())));
+            System.out.println(hand.scoring());
 
         }
         // <temporary!!>

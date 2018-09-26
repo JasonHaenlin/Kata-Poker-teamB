@@ -53,7 +53,7 @@ class Referee {
 	 *
 	 * @param hand
 	 * @return La valeur de la carte qui forme la pair si il y a une pair dans hand sinon elle retourne -1.
-	 * En cas de double pair , retourne uniquement la pair la plus faible.
+	 * En cas de double pair, retourne uniquement la pair la plus faible.
 	 */
 	int findPair(Hand hand){
 		List<Card> handlist = hand.getHand();
@@ -81,7 +81,7 @@ class Referee {
 	 * @param hand
 	 * @return La valeur de la carte qui forme le brelan si il y a un brelan dans hand sinon elle retourne -1.
 	 */
-	int findBrelan(Hand hand){
+	int findTriple(Hand hand){
 		List<Card> handlist = hand.getHand();
 		for (int i=0;i<handlist.size()-4;i++){
 			Card first = handlist.get(i);
@@ -108,7 +108,7 @@ class Referee {
 	 * @param hand
 	 * @return La valeur de la carte qui forme le carré  si il y a un carré dans hand sinon elle retourne -1.
 	 */
-	int findSquare(Hand hand){
+	int findFourOfAKind(Hand hand){
 		List<Card> handlist = hand.getHand();
 		for (int i=0;i<handlist.size()-4;i++){
 			Card first = handlist.get(i);

@@ -61,52 +61,52 @@ public class RefereeTest {
 
 
     }
-    @Test public void testBrelan() {
+    @Test public void testTriple() {
         Referee Referee = new Referee();
         Hand hand1 = new Hand(1);
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "5", "6")));
-        assertEquals(-1, Referee.findBrelan(hand1));
+        assertEquals(-1, Referee.findTriple(hand1));
 
         Hand hand2 = new Hand(1);
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "12", "5", "6")));
-        assertEquals(-1, Referee.findBrelan(hand2));
+        assertEquals(-1, Referee.findTriple(hand2));
 
         Hand hand3 = new Hand(1);
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "12", "7", "7")));
-        assertEquals(7, Referee.findBrelan(hand3));
+        assertEquals(7, Referee.findTriple(hand3));
 
         Hand hand4 = new Hand(1);
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "7", "7")));
-        assertEquals(-1, Referee.findBrelan(hand4));
+        assertEquals(-1, Referee.findTriple(hand4));
 
         Hand hand5 = new Hand(1);
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "8", "8")));
-        assertEquals(-1, Referee.findBrelan(hand5));
+        assertEquals(-1, Referee.findTriple(hand5));
 
 
     }
 
-    @Test public void testSquare() {
+    @Test public void testFourOfAKind() {
         Referee Referee = new Referee();
         Hand hand1 = new Hand(1);
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "5", "6")));
-        assertEquals(-1, Referee.findSquare(hand1));
+        assertEquals(-1, Referee.findFourOfAKind(hand1));
 
         Hand hand2 = new Hand(1);
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "12", "5", "6")));
-        assertEquals(-1, Referee.findSquare(hand2));
+        assertEquals(-1, Referee.findFourOfAKind(hand2));
 
         Hand hand3 = new Hand(1);
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "12", "7", "7")));
-        assertEquals(-1, Referee.findSquare(hand3));
+        assertEquals(-1, Referee.findFourOfAKind(hand3));
 
         Hand hand4 = new Hand(1);
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "7", "7")));
-        assertEquals(7, Referee.findSquare(hand4));
+        assertEquals(7, Referee.findFourOfAKind(hand4));
 
         Hand hand5 = new Hand(1);
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "8", "8")));
-        assertEquals(-1, Referee.findSquare(hand5));
+        assertEquals(-1, Referee.findFourOfAKind(hand5));
 
     }
 

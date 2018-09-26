@@ -1,15 +1,14 @@
 package poker;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 class Hand {
 
     // Instantiate an arrayList of type Card
-    private SortedSet<Card> hand;
+    private List<Card> hand;
     int handNumber;
 
     Hand(int handNumber) {
@@ -26,7 +25,7 @@ class Hand {
             System.out.println("Nombre incorrect de carte :");
             return false;
         }
-        hand = new TreeSet<>((Card c1, Card c2) -> Integer.compare(c1.getValue(), c2.getValue()));
+        hand = new ArrayList<>();
         for (String card : listCard) {
             try {
                 hand.add(new Card(Integer.parseInt(card)));
@@ -35,6 +34,7 @@ class Hand {
                 return false;
             }
         }
+        hand.sort((Card c1, Card c2) -> Integer.compare(c1.getValue(), c2.getValue()));
         return true;
 
     }
@@ -42,7 +42,7 @@ class Hand {
     /**
      * @return the hand
      */
-    SortedSet<Card> getHand() {
+    List<Card> getHand() {
         return hand;
     }
 
@@ -60,7 +60,7 @@ class Hand {
      * @return
      */
     int handCardHightestValue() {
-        return this.getHand().last().getValue();
+        return this.hand.get(this.hand.size() - 1).getValue();
     }
 
     boolean check(List<String> listCard) {
@@ -83,15 +83,15 @@ class Hand {
             }
 
             switch (HandOccuration.get(hs)) {
-                case 2:
-                    score = 100 + hs;
-                    break;
-                case 3:
-                    score = 1000 + hs;
-                    break;
-                case 4:
-                    score = 10000 + hs;
-                    break;
+            case 2:
+                score = 100 + hs;
+                break;
+            case 3:
+                score = 1000 + hs;
+                break;
+            case 4:
+                score = 10000 + hs;
+                break;
             }
         }
         return score;

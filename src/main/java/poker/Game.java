@@ -20,16 +20,17 @@ public class Game {
             System.out.println(hand.scoring());
 
         }
-        // <temporary!!>
-        Hand hand1 = player.get(0); //
+        Hand hand1 = player.get(0);
         Hand hand2 = player.get(1);
-
         Referee.winner(hand1, hand2);
-
-        // </temporary!!>
-
     }
 
+    /**
+     * ask the player to enter a list of cards.
+     * 
+     * @param player
+     * @return a list of cards as a list of string.
+     */
     public static ArrayList<String> readEntry(int player) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Joueur " + player + ": veuillez saisir une main");

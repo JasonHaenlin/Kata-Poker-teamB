@@ -6,7 +6,7 @@ public enum CombinationType {
 	TRIPLE("Triple"),
 	FOUROFAKIND("Carre");
 
-	private String typeOfHand = "";
+	public String typeOfHand = "";
 
 	CombinationType(String typeOfHand) {
 		this.typeOfHand = typeOfHand;

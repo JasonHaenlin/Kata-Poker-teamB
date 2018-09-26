@@ -32,4 +32,21 @@ class Card {
     boolean isCardCorrect() {
         return 2 <= this.value && this.value <= 14;
     }
+
+    @Override
+    public int hashCode() {
+        return this.value;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Card)) {
+            return false;
+        }
+        Card card = (Card) obj;
+        return this.value == card.value;
+    }
 }

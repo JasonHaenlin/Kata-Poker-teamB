@@ -14,7 +14,7 @@ class Referee {
 
 	 CombinationType typeHand(Hand hand)  //Detecte le type de la main entre Carree, Brelan, Pair et carte haute
     {
-        if(findSquare(hand) != -1)
+        if(findFourOfAKind(hand) != -1)
         {
             return CombinationType.FOUROFAKIND;
         }

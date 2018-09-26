@@ -9,7 +9,7 @@ class Hand {
 
     // Instantiate an arrayList of type Card
     private List<Card> hand;
-    int handNumber;
+    private int handNumber;
 
     Hand(int handNumber) {
         this.handNumber = handNumber;
@@ -54,7 +54,8 @@ class Hand {
     }
 
     /**
-     * retrieve the value of the higher card right now just the first value is retrieve
+     * retrieve the value of the higher card right now just the first value is
+     * retrieve
      *
      * @return
      */
@@ -82,15 +83,15 @@ class Hand {
             }
 
             switch (HandOccuration.get(hs)) {
-                case 2:
-                    score = 100 + hs;
-                    break;
-                case 3:
-                    score = 1000 + hs;
-                    break;
-                case 4:
-                    score = 10000 + hs;
-                    break;
+            case 2:
+                score = 100 + hs;
+                break;
+            case 3:
+                score = 1000 + hs;
+                break;
+            case 4:
+                score = 10000 + hs;
+                break;
             }
         }
         return score;

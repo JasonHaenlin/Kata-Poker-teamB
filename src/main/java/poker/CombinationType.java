@@ -1,10 +1,12 @@
 package poker;
 
 public enum CombinationType {
-	HIGHCARD("Carte la plus haute"),
-	PAIR("Paire"),
-	TRIPLE("Triple"),
+	// @formatter:off
+	HIGHCARD("Carte la plus haute"), 
+	PAIR("Paire"), 
+	TRIPLE("Triple"), 
 	FOUROFAKIND("Carre");
+	// @formatter:on
 
 	public String typeOfHand = "";
 

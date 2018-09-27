@@ -25,7 +25,7 @@ public class WinnerTest {
 	public void winnerFirstHandTest() throws Exception {
 		hand1.buildNewHand(new ArrayList<>(Arrays.asList("14", "8", "2", "14", "12")));
 		hand2.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "7", "9", "10")));
-		assertEquals(1, winner(hand1, hand2));
+		assertEquals(0, winner(hand1, hand2));
 	}
 
 	@Test

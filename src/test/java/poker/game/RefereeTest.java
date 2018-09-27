@@ -25,7 +25,7 @@ public class RefereeTest {
     }
 
     @Test
-    public void winnerTest() throws Exception {
+    public void winnerTest() {
 
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "7", "9", "10")));
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("14", "8", "2", "11", "12")));
@@ -57,7 +57,7 @@ public class RefereeTest {
     }
 
     @Test
-    public void testPair() throws Exception {
+    public void testPair() {
         // pair in hand
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "5", "6")));
         assertEquals(7, referee.findPair(hand1));
@@ -76,7 +76,7 @@ public class RefereeTest {
     }
 
     @Test
-    public void testThreeOfAKind() throws Exception {
+    public void testThreeOfAKind() {
         // not a ThreeOfAkind just a pair
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "5", "6")));
         assertEquals(-1, referee.findTriple(hand1));
@@ -95,7 +95,7 @@ public class RefereeTest {
     }
 
     @Test
-    public void testFourOfAKind() throws Exception {
+    public void testFourOfAKind() {
         // not a FourOfAKind just a pair
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "5", "6")));
         assertEquals(-1, referee.findFourOfAKind(hand1));

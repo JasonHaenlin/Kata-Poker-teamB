@@ -8,7 +8,7 @@ import poker.game.Game.Player;
  */
 public class Poker {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Game game = new Game();
         game.readNewEntry(Player.FIRST);
         game.readNewEntry(Player.SECOND);

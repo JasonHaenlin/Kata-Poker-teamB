@@ -10,10 +10,10 @@ class Card {
      * @param value
      * @throws Exception
      */
-    Card(int value) throws Exception {
+    Card(int value) {
         this.value = value;
         if (!this.isCardCorrect()) {
-            throw new Exception("Erreur lors de la saisie d'une ou plusieurs cartes");
+            throw new RuntimeException("Erreur lors de la saisie d'une ou plusieurs cartes");
         }
     }
 

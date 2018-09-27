@@ -25,7 +25,7 @@ public class CardTest {
     }
 
     @Test
-    public void CardObjTest() throws Exception {
+    public void CardObjTest() {
         Card card1 = new Card(14);
         Card card2 = new Card(14);
         Card card3 = new Card(7);

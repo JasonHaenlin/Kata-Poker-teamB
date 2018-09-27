@@ -36,7 +36,7 @@ public class Game {
      * @throws NumberFormatException
      * @throws Exception
      */
-    public void readNewEntry(Player player) throws Exception {
+    public void readNewEntry(Player player) {
         int numPlayer = player.ordinal();
         this.player.get(numPlayer).buildNewHand(readEntry(numPlayer));
     }

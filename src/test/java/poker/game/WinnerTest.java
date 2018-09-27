@@ -22,21 +22,21 @@ public class WinnerTest {
 	}
 
 	@Test
-	public void winnerFirstHandTest() throws Exception {
+	public void winnerFirstHandTest() {
 		hand1.buildNewHand(new ArrayList<>(Arrays.asList("14", "8", "2", "14", "12")));
 		hand2.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "7", "9", "10")));
 		assertEquals(0, winner(hand1, hand2));
 	}
 
 	@Test
-	public void winnerSecondHandTest() throws Exception {
+	public void winnerSecondHandTest() {
 		hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "6", "5", "9")));
 		hand2.buildNewHand(new ArrayList<>(Arrays.asList("9", "8", "2", "8", "14")));
 		assertEquals(2, winner(hand1, hand2));
 	}
 
 	@Test
-	public void equalityHandTest() throws Exception {
+	public void equalityHandTest() {
 		hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "14", "9", "9")));
 		hand2.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "14", "9", "9")));
 		assertEquals(0, winner(hand1, hand2));

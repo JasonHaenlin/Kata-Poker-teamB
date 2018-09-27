@@ -20,9 +20,9 @@ class Hand {
      * @throws Exception
      * @throws NumberFormatException
      */
-    void buildNewHand(List<String> listCard) throws Exception {
+    void buildNewHand(List<String> listCard) {
         if (!check(listCard)) {
-            throw new Exception("Erreur de saisie de la main: taille d'une main = 5 cartes");
+            throw new RuntimeException("Erreur de saisie de la main: taille d'une main = 5 cartes");
         }
         hand = new ArrayList<>();
         for (String card : listCard) {

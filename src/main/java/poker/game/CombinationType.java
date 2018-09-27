@@ -1,6 +1,6 @@
-package poker;
+package poker.game;
 
-public enum CombinationType {
+enum CombinationType {
 	// @formatter:off
 	HIGHCARD("Carte la plus haute"), 
 	PAIR("Paire"), 
@@ -8,7 +8,7 @@ public enum CombinationType {
 	FOUROFAKIND("Carre");
 	// @formatter:on
 
-	public String typeOfHand = "";
+	private String typeOfHand = "";
 
 	CombinationType(String typeOfHand) {
 		this.typeOfHand = typeOfHand;
@@ -19,7 +19,7 @@ public enum CombinationType {
 		return this.typeOfHand;
 	}
 
-	public String getTypeOfHand() {
+	String getTypeOfHand() {
 		return typeOfHand;
 	}
 }

@@ -1,4 +1,4 @@
-package poker;
+package poker.game;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,34 +25,39 @@ public class RefereeTest {
     }
 
     @Test
-    public void winnerTest() {
+    public void winnerTest() throws Exception {
 
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "7", "9", "10")));
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("14", "8", "2", "11", "12")));
         //La main 1 doit gagner avec une paire
-        assertEquals(1, referee.winner(hand1, hand2));
+        assertEquals(1, winner(hand1, hand2));
 
-        assertEquals(2, referee.winner(hand2, hand1));
+        assertEquals(2, winner(hand2, hand1));
 
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("14", "8", "2", "14", "12")));
         //Les deux mains ont une paire
-        assertEquals(0, referee.winner(hand1, hand3));
-        assertEquals(0, referee.winner(hand1, hand1));
-        assertEquals(0, referee.winner(hand2, hand2));
+        assertEquals(0, winner(hand1, hand3));
+        assertEquals(0, winner(hand1, hand1));
+        assertEquals(0, winner(hand2, hand2));
 
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "7", "9", "7")));
         //La main 4 gagne avec un brelan face à rien
-        assertEquals(1, referee.winner(hand4, hand2));
-        assertEquals(2, referee.winner(hand2, hand4));
+        assertEquals(1, winner(hand4, hand2));
+        assertEquals(2, winner(hand2, hand4));
         //La main 4 gagne sur une paire
-        assertEquals(1, referee.winner(hand4, hand1));
-        assertEquals(2, referee.winner(hand1, hand4));
+        assertEquals(1, winner(hand4, hand1));
+        assertEquals(2, winner(hand1, hand4));
 
-        assertEquals(0, referee.winner(hand4, hand4));
+        assertEquals(0, winner(hand4, hand4));
+    }
+
+    private int winner(Hand hand1, Hand hand2) {
+        referee.checkHandsCombination(hand1, hand2);
+        return referee.establishTheWinner();
     }
 
     @Test
-    public void testPair() {
+    public void testPair() throws Exception {
         // pair in hand
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "5", "6")));
         assertEquals(7, referee.findPair(hand1));
@@ -71,7 +76,7 @@ public class RefereeTest {
     }
 
     @Test
-    public void testThreeOfAKind() {
+    public void testThreeOfAKind() throws Exception {
         // not a ThreeOfAkind just a pair
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "5", "6")));
         assertEquals(-1, referee.findTriple(hand1));
@@ -90,7 +95,7 @@ public class RefereeTest {
     }
 
     @Test
-    public void testFourOfAKind() {
+    public void testFourOfAKind() throws Exception {
         // not a FourOfAKind just a pair
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "5", "6")));
         assertEquals(-1, referee.findFourOfAKind(hand1));

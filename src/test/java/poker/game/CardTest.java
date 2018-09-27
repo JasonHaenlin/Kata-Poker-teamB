@@ -1,4 +1,4 @@
-package poker;
+package poker.game;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

@@ -13,7 +13,7 @@ class Card {
     Card(int value) throws Exception {
         this.value = value;
         if (!this.isCardCorrect()) {
-            throw new Exception("Erreur lors de la saisie");
+            throw new Exception("Erreur lors de la saisie d'une ou plusieurs cartes");
         }
     }
 

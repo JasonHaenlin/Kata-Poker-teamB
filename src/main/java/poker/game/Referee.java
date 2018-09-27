@@ -46,17 +46,17 @@ class Referee {
 	 * @param hand2
 	 */
 	void checkHandsCombination(Hand hand1, Hand hand2) {
-		c1 = typeHand(hand1);
-		c2 = typeHand(hand2);
+		this.c1 = typeHand(hand1);
+		this.c2 = typeHand(hand2);
 	}
 
 	/**
+	 * Detecte le type de la main entre Carree, Brelan, Pair et carte haute
 	 * 
 	 * @param hand
 	 * @return
 	 */
-	CombinationType typeHand(Hand hand) //Detecte le type de la main entre Carree, Brelan, Pair et carte haute
-	{
+	CombinationType typeHand(Hand hand) {
 		if (findFourOfAKind(hand) != -1) {
 			return CombinationType.FOUROFAKIND;
 		} else if (findTriple(hand) != -1) {

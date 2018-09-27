@@ -30,7 +30,7 @@ public class WinnerTest {
 
 	@Test
 	public void winnerSecondHandTest() throws Exception {
-		hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "12", "9", "9")));
+		hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "6", "5", "9")));
 		hand2.buildNewHand(new ArrayList<>(Arrays.asList("9", "8", "2", "8", "14")));
 		assertEquals(2, winner(hand1, hand2));
 	}

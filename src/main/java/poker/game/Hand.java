@@ -22,7 +22,7 @@ class Hand {
      */
     void buildNewHand(List<String> listCard) throws Exception {
         if (!check(listCard)) {
-            System.out.println("Nombre incorrect de carte :");
+            throw new Exception("Erreur de saisie de la main: taille d'une main = 5 cartes");
         }
         hand = new ArrayList<>();
         for (String card : listCard) {

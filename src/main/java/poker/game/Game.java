@@ -33,18 +33,14 @@ public class Game {
     /**
      * 
      * @param player
-     * @throws NumberFormatException
-     * @throws Exception
      */
     public void readNewEntry(Player player) {
-        int numPlayer = player.ordinal() + 1;   //dans l'enum on commence l'indice à 0 et on veut les joueurs 1 et 2
+        int numPlayer = player.ordinal() + 1;
         this.player.get(numPlayer).buildNewHand(readEntry(numPlayer));
     }
 
     /**
      * 
-     * @param first
-     * @param second
      */
     public void printTheResult() {
         referee.printResultOfTheGame();
@@ -52,8 +48,6 @@ public class Game {
 
     /**
      * 
-     * @param first
-     * @param second
      */
     public void identifyTheWinner() {
         referee.establishTheWinner();
@@ -61,8 +55,6 @@ public class Game {
 
     /**
      * 
-     * @param first
-     * @param second
      */
     public void computeTheHands() {
         Hand firstPlayer = player.get(Player.FIRST.ordinal());

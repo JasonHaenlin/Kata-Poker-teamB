@@ -37,7 +37,7 @@ public class Game {
      * @throws Exception
      */
     public void readNewEntry(Player player) {
-        int numPlayer = player.ordinal();
+        int numPlayer = player.ordinal() + 1;   //dans l'enum on commence l'indice à 0 et on veut les joueurs 1 et 2
         this.player.get(numPlayer).buildNewHand(readEntry(numPlayer));
     }
 

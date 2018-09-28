@@ -2,7 +2,7 @@ package poker.game;
 
 enum CombinationType {
 	// @formatter:off
-	HIGHCARD("Carte la plus haute"), 
+	HIGHESTCARD("Carte la plus haute"),
 	PAIR("Paire"), 
 	TRIPLE("Triple"), 
 	FOUROFAKIND("Carre");

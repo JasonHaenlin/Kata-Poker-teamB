@@ -66,7 +66,7 @@ public class Game {
      */
     public void computeTheHands() {
         Hand firstPlayer = player.get(Player.FIRST.ordinal());
-        Hand secondPlayer = player.get(Player.FIRST.ordinal());
+        Hand secondPlayer = player.get(Player.SECOND.ordinal());
         referee.checkHandsCombination(firstPlayer, secondPlayer);
     }
 

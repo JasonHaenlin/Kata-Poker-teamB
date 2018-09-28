@@ -11,9 +11,9 @@ class Referee {
 	 * 
 	 */
 	Referee() {
-		c1 = CombinationType.HIGHCARD;
-		c2 = CombinationType.HIGHCARD;
-		winnerMsg = "";
+		this.c1 = CombinationType.HIGHCARD;
+		this.c2 = CombinationType.HIGHCARD;
+		this.winnerMsg = "";
 	}
 
 	/**

@@ -37,37 +37,31 @@ public class Game {
      * @throws Exception
      */
     public void readNewEntry(Player player) {
-        int numPlayer = player.ordinal() + 1;   //dans l'enum on commence l'indice à 0 et on veut les joueurs 1 et 2
-        this.player.get(numPlayer).buildNewHand(readEntry(numPlayer));
+        int numPlayer = player.ordinal();
+        this.player.get(numPlayer).buildNewHand(readEntry(numPlayer+1)); //Le +1 est uniquement dans l'affichage
     }
 
     /**
-     * 
-     * @param first
-     * @param second
+     *
      */
     public void printTheResult() {
         referee.printResultOfTheGame();
     }
 
     /**
-     * 
-     * @param first
-     * @param second
+     *
      */
     public void identifyTheWinner() {
         referee.establishTheWinner();
     }
 
     /**
-     * 
-     * @param first
-     * @param second
+     *
      */
     public void computeTheHands() {
         Hand firstPlayer = player.get(Player.FIRST.ordinal());
         Hand secondPlayer = player.get(Player.SECOND.ordinal());
-        referee.checkHandsCombination(firstPlayer, secondPlayer);
+        referee.checkHandsCombination(firstPlayer, secondPlayer);  // A MODIFIER !!!!!!
     }
 
     private ArrayList<String> readEntry(int player) {

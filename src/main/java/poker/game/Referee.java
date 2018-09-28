@@ -11,8 +11,8 @@ class Referee {
 	 * 
 	 */
 	Referee() {
-		c1 = CombinationType.HIGHCARD;
-		c2 = CombinationType.HIGHCARD;
+		c1 = CombinationType.HIGHESTCARD;
+		c2 = CombinationType.HIGHESTCARD;
 		winnerMsg = "";
 	}
 
@@ -64,7 +64,7 @@ class Referee {
 		} else if (findPair(hand) != -1) {
 			return CombinationType.PAIR;
 		} else {
-			return CombinationType.HIGHCARD;
+			return CombinationType.HIGHESTCARD;
 		}
 	}
 

@@ -2,7 +2,7 @@ package poker.game;
 
 import java.util.List;
 
-public class Detection {
+class Detection {
 
     CombinationType type1, type2;
 
@@ -10,8 +10,7 @@ public class Detection {
      * Classe pour detecter les types de main
      */
 
-    Detection()
-    {
+    Detection() {
         this.type1 = CombinationType.HIGHESTCARD;
         this.type2 = CombinationType.HIGHESTCARD;
     }
@@ -26,15 +25,14 @@ public class Detection {
         this.type2 = typeHand(hand2);
     }
 
-    CombinationType getType1()
-    {
+    CombinationType getType1() {
         return type1;
     }
 
-    CombinationType getType2()
-    {
+    CombinationType getType2() {
         return type2;
     }
+
     /**
      * Detecte le type de la main entre Carree, Brelan, Pair et carte haute
      *

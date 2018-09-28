@@ -51,5 +51,4 @@ class Referee {
 		detection.detectionHand(hand1, hand2);
 	}
 
-
 }

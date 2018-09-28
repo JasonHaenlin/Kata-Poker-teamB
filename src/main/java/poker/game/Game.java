@@ -33,22 +33,18 @@ public class Game {
     /**
      * 
      * @param player
-     * @throws NumberFormatException
-     * @throws Exception
      */
     public void readNewEntry(Player player) {
         int numPlayer = player.ordinal();
         this.player.get(numPlayer).buildNewHand(readEntry(numPlayer+1)); //Le +1 est uniquement dans l'affichage
     }
 
-    /**
-     *
-     */
     public void printTheResult() {
         referee.printResultOfTheGame();
     }
 
     /**
+     *
      *
      */
     public void identifyTheWinner() {
@@ -57,11 +53,12 @@ public class Game {
 
     /**
      *
+     *
      */
     public void computeTheHands() {
         Hand firstPlayer = player.get(Player.FIRST.ordinal());
         Hand secondPlayer = player.get(Player.SECOND.ordinal());
-        referee.checkHandsCombination(firstPlayer, secondPlayer);  // A MODIFIER !!!!!!
+        referee.checkHandsCombination(firstPlayer, secondPlayer);
     }
 
     private ArrayList<String> readEntry(int player) {

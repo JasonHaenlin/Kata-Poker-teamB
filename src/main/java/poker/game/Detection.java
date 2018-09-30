@@ -21,8 +21,8 @@ class Detection {
      * @param hand2
      */
     void detectionHand(Hand hand1, Hand hand2) {
-        this.type1 = typeHand(hand1);
-        this.type2 = typeHand(hand2);
+        this.type1 = typeHand(hand1.getHand());
+        this.type2 = typeHand(hand2.getHand());
     }
 
     CombinationType getType1() {
@@ -39,12 +39,12 @@ class Detection {
      * @param hand
      * @return
      */
-    CombinationType typeHand(Hand hand) {
-        if (findFourOfAKind(hand) != -1) {
+    CombinationType typeHand(List<Card> cards) {
+        if (findFourOfAKind(cards) != -1) {
             return CombinationType.FOUROFAKIND;
-        } else if (findTriple(hand) != -1) {
+        } else if (findTriple(cards) != -1) {
             return CombinationType.TRIPLE;
-        } else if (findPair(hand) != -1) {
+        } else if (findPair(cards) != -1) {
             return CombinationType.PAIR;
         } else {
             return CombinationType.HIGHESTCARD;
@@ -58,23 +58,13 @@ class Detection {
      *         sinon elle retourne -1. En cas de double pair, retourne uniquement la
      *         pair la plus faible.
      */
-    int findPair(Hand hand) {
-        List<Card> handlist = hand.getHand();
-        for (int i = 0; i < handlist.size() - 3; i++) {
-            Card first = handlist.get(i);
-            Card second = handlist.get(i + 1);
-            Card third = handlist.get(i + 2);
-            Card four = handlist.get(i + 3);
-            if (first.equals(second) && !second.equals(third)) {
-                return first.getValue();
+    int findPair(List<Card> cards) {
+        Card prevCard = null;
+        for (Card currCard : cards) {
+            if (currCard.equals(prevCard)) {
+                return currCard.getValue();
             }
-            if (!first.equals(second) && second.equals(third) && !third.equals(four)) {
-                return second.getValue();
-            }
-            if (!second.equals(third) && third.equals(four)) {
-                return third.getValue();
-            }
-
+            prevCard = currCard;
         }
         return -1;
     }
@@ -85,24 +75,20 @@ class Detection {
      * @return La valeur de la carte qui forme le brelan si il y a un brelan dans
      *         hand sinon elle retourne -1.
      */
-    int findTriple(Hand hand) {
-        List<Card> handlist = hand.getHand();
-        for (int i = 0; i < handlist.size() - 4; i++) {
-            Card first = handlist.get(i);
-            Card second = handlist.get(i + 1);
-            Card third = handlist.get(i + 2);
-            Card four = handlist.get(i + 3);
-            Card five = handlist.get(i + 4);
-            if (first.equals(second) && second.equals(third) && !third.equals(four)) {
-                return first.getValue();
-            }
-            if (!first.equals(second) && second.equals(third) && third.equals(four) && !four.equals(five)) {
-                return second.getValue();
-            }
-            if (!second.equals(third) && third.equals(four) && four.equals(five)) {
-                return third.getValue();
-            }
-
+    int findTriple(List<Card> cards) {
+        Card first = cards.get(0);
+        Card second = cards.get(1);
+        Card third = cards.get(2);
+        Card fourth = cards.get(3);
+        Card fifth = cards.get(4);
+        if (first.equals(second) && second.equals(third) && !third.equals(fourth)) {
+            return first.getValue();
+        }
+        if (!first.equals(second) && second.equals(third) && third.equals(fourth) && !fourth.equals(fifth)) {
+            return second.getValue();
+        }
+        if (!second.equals(third) && third.equals(fourth) && fourth.equals(fifth)) {
+            return third.getValue();
         }
         return -1;
     }
@@ -113,21 +99,17 @@ class Detection {
      * @return La valeur de la carte qui forme le carré si il y a un carré dans hand
      *         sinon elle retourne -1.
      */
-    int findFourOfAKind(Hand hand) {
-        List<Card> handlist = hand.getHand();
-        for (int i = 0; i < handlist.size() - 4; i++) {
-            Card first = handlist.get(i);
-            Card second = handlist.get(i + 1);
-            Card third = handlist.get(i + 2);
-            Card four = handlist.get(i + 3);
-            Card five = handlist.get(i + 4);
-            if (first.equals(second) && second.equals(third) && third.equals(four) && !four.equals(five)) {
-                return first.getValue();
-            }
-            if (!first.equals(second) && second.equals(third) && third.equals(four) && four.equals(five)) {
-                return second.getValue();
-            }
-
+    int findFourOfAKind(List<Card> cards) {
+        Card first = cards.get(0);
+        Card second = cards.get(1);
+        Card third = cards.get(2);
+        Card fourth = cards.get(3);
+        Card fifth = cards.get(4);
+        if (first.equals(second) && second.equals(third) && third.equals(fourth) && !fourth.equals(fifth)) {
+            return first.getValue();
+        }
+        if (!first.equals(second) && second.equals(third) && third.equals(fourth) && fourth.equals(fifth)) {
+            return second.getValue();
         }
         return -1;
     }

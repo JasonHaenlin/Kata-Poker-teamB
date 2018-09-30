@@ -24,8 +24,8 @@ public class WinnerTest {
 	@Test
 	public void winnerFirstHandTest() {
 		hand1.buildNewHand(new ArrayList<>(Arrays.asList("14", "8", "2", "14", "12")));
-		hand2.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "7", "9", "10")));
-		assertEquals(0, winner(hand1, hand2));
+		hand2.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "6", "9", "10")));
+		assertEquals(1, winner(hand1, hand2));
 	}
 
 	@Test
@@ -45,5 +45,26 @@ public class WinnerTest {
 	private int winner(Hand hand1, Hand hand2) {
 		referee.checkHandsCombination(hand1, hand2);
 		return referee.establishTheWinner();
+	}
+
+	@Test
+	public void winnerPairTest() {
+		hand1.buildNewHand(new ArrayList<>(Arrays.asList("11", "8", "2", "14", "11")));
+		hand2.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "6", "9", "10")));
+		assertEquals(1, winner(hand1, hand2));
+	}
+
+	@Test
+	public void winnerThreeOfAKindTest() {
+		hand1.buildNewHand(new ArrayList<>(Arrays.asList("11", "8", "2", "14", "11")));
+		hand2.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "4", "4", "10")));
+		assertEquals(2, winner(hand1, hand2));
+	}
+
+	@Test
+	public void winnerFourOfAKindTest() {
+		hand1.buildNewHand(new ArrayList<>(Arrays.asList("10", "10", "10", "10", "11")));
+		hand2.buildNewHand(new ArrayList<>(Arrays.asList("7", "4", "6", "9", "10")));
+		assertEquals(1, winner(hand1, hand2));
 	}
 }

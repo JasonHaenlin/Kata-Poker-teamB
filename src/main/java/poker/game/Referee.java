@@ -1,7 +1,5 @@
 package poker.game;
 
-import java.util.List;
-
 class Referee {
 
 	String winnerMsg;

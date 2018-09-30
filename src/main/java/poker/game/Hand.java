@@ -45,16 +45,6 @@ class Hand {
         return handNumber;
     }
 
-    /**
-     * retrieve the value of the higher card right now just the first value is
-     * retrieve
-     *
-     * @return
-     */
-    int handCardHightestValue() {
-        return this.hand.get(this.hand.size() - 1).getValue();
-    }
-
     private boolean check(List<String> listCard) {
         return listCard.size() == maxNumberOfCards;
 

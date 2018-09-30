@@ -1,26 +1,28 @@
 package poker.game;
 
+/**
+ * This class judge who is the winner
+ */
 class Referee {
 
-	String winnerMsg;
-	Detection detection;
+	private String winnerMsg;
+	private Detection detection;
 
-	/**
-	 * 
-	 */
 	Referee() {
 		this.winnerMsg = "";
 		detection = new Detection();
 	}
 
 	/**
-	 * 
+	 * print the result of the game after the check has been done.
 	 */
 	void printResultOfTheGame() {
 		System.out.println(winnerMsg);
 	}
 
 	/**
+	 * compare the hand combinations and store the result has a string. Use
+	 * <strong>printResultOfTheGame()</strong> to display the result.
 	 * 
 	 * @return
 	 */
@@ -41,12 +43,13 @@ class Referee {
 	}
 
 	/**
-	 *
+	 * Check the possible combinaison on each hand.
+	 * 
 	 * @param hand1
 	 * @param hand2
 	 */
 	void checkHandsCombination(Hand hand1, Hand hand2) {
-		detection.detectionHand(hand1, hand2);
+		detection.detectHandsPatterns(hand1, hand2);
 	}
 
 }

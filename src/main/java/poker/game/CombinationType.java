@@ -4,8 +4,8 @@ enum CombinationType {
 	// @formatter:off
 	HIGHESTCARD("Carte la plus haute"),
 	PAIR("Paire"), 
-	TRIPLE("Triple"), 
-	FOUROFAKIND("Carre");
+	TREE_OF_A_KIND("Triple"), 
+	FOUR_OF_A_KIND("Carre");
 	// @formatter:on
 
 	private String typeOfHand = "";
@@ -17,9 +17,5 @@ enum CombinationType {
 	@Override
 	public String toString() {
 		return this.typeOfHand;
-	}
-
-	String getTypeOfHand() {
-		return typeOfHand;
 	}
 }

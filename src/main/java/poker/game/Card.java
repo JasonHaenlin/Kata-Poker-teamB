@@ -29,7 +29,7 @@ class Card {
      * 
      * @return true if it's correct, false otherwise
      */
-    boolean isCardCorrect() {
+    private boolean isCardCorrect() {
         return 2 <= this.value && this.value <= 14;
     }
 
@@ -38,6 +38,12 @@ class Card {
         return this.value;
     }
 
+    /**
+     * check if they are both cards with the same value
+     * 
+     * @param obj
+     * @return true if they are the same, false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

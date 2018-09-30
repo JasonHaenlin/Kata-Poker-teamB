@@ -10,9 +10,6 @@ import java.util.Scanner;
  */
 public class Game {
 
-    /**
-     * 
-     */
     public enum Player {
         FIRST, SECOND;
     }
@@ -21,7 +18,7 @@ public class Game {
     private Referee referee;
 
     /**
-     * 
+     * create a poker game with 2 players
      */
     public Game() {
         this.player = new ArrayList<>();
@@ -31,6 +28,7 @@ public class Game {
     }
 
     /**
+     * This method ask the user to enter a set of cards (5 cards no more, no less)
      * 
      * @param player
      */
@@ -39,12 +37,17 @@ public class Game {
         this.player.get(numPlayer).buildNewHand(readEntry(numPlayer + 1)); //Le +1 est uniquement dans l'affichage
     }
 
+    /**
+     * print the result of the game after both hands has been <strong>computed and
+     * identified</strong> to tell the winner
+     */
     public void printTheResult() {
         referee.printResultOfTheGame();
     }
 
     /**
-     *
+     * identidy the winner after both players hands has been check by
+     * <strong>computeTheHand()</strong>
      *
      */
     public void identifyTheWinner() {
@@ -52,7 +55,7 @@ public class Game {
     }
 
     /**
-     *
+     * Check the possible compbinaison in both hands
      *
      */
     public void computeTheHands() {

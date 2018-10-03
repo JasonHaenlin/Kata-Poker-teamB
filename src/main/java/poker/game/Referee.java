@@ -28,8 +28,9 @@ class Referee {
 	 */
 	int establishTheWinner(Hand hand1, Hand hand2) {
 		CombinationType c1, c2;
-		c1 = hand1.getType1();
-		c2 = hand2.getType2();
+		c1 = hand1.getHandPattern();
+		c2 = hand2.getHandPattern();
+
 		if (c1.ordinal() < c2.ordinal()) {
 			winnerMsg = "La main 2 gagne avec : " + c2.toString();
 			return 2;
@@ -40,19 +41,6 @@ class Referee {
 			winnerMsg = "Les deux mains sont du même type";
 			return 0;
 		}
-	}
-
-
-
-	/**
-	 * Check the possible combinaison on each hand.
-	 * 
-	 * @param hand1
-	 * @param hand2
-	 */
-	void checkHandsCombination(Hand hand1, Hand hand2) {
-		hand1.detectHandPatterns(hand1);
-		hand2.detectHandPatterns(hand2);
 	}
 
 }

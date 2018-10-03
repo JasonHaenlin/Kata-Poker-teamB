@@ -12,7 +12,6 @@ public class Poker {
         Game game = new Game();
         game.readNewEntry(Player.FIRST);
         game.readNewEntry(Player.SECOND);
-        game.computeTheHands();
         game.identifyTheWinner();
         game.printTheResult();
     }

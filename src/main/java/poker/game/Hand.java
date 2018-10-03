@@ -5,15 +5,14 @@ import java.util.List;
 
 class Hand {
 
-    private CombinationType type1, type2;
+    private CombinationType type;
     private final int maxNumberOfCards = 5;
     private List<Card> hand;
     private int handNumber;
 
     Hand(int handNumber) {
         this.handNumber = handNumber;
-        this.type1 = CombinationType.HIGHESTCARD;
-        this.type2 = CombinationType.HIGHESTCARD;
+        this.type = CombinationType.HIGHESTCARD;
     }
 
     /**
@@ -51,8 +50,6 @@ class Hand {
     private boolean check(List<String> listCard) {
         return listCard.size() == maxNumberOfCards;
     }
-
-
 
     /**
      * Check every cards of a hand to see if a pattern is found.
@@ -100,7 +97,7 @@ class Hand {
      *
      * @param cards
      * @return -1 if no tree of a kind has been found, return the value of the
-     * pattern otherwise.
+     *         pattern otherwise.
      */
     int isTreeOfAKindDetected(List<Card> cards) {
         Card first = cards.get(0);
@@ -125,7 +122,7 @@ class Hand {
      *
      * @param cards
      * @return -1 if no four of a kind has been found, return the value of the
-     * pattern otherwise.
+     *         pattern otherwise.
      */
     int isFourOfAKindDetected(List<Card> cards) {
         Card first = cards.get(0);
@@ -144,12 +141,12 @@ class Hand {
 
     /**
      * @param cards
-     * @return {-,-1} if no full has been found, return a tables with value of three of
-     * kind and value of pair
+     * @return {-,-1} if no full has been found, return a tables with value of three
+     *         of kind and value of pair
      */
     int[] isFullDetected(List<Card> cards) {
         int tok = isTreeOfAKindDetected(cards);
-        int full[] = {-1, -1};
+        int full[] = { -1, -1 };
         int val = 0;
 
         if (tok != -1) {
@@ -170,26 +167,21 @@ class Hand {
 
     /**
      * @param cards
-     * @return -1 if no straight has been found or return the highest value of the straight.
+     * @return -1 if no straight has been found or return the highest value of the
+     *         straight.
      */
     int isStraight(List<Card> cards) {
-
-
         int longueur = cards.size();
         Card max = cards.get(longueur - 1);
         int i = 0;
-
         while (cards.get(i + 1).getValue() - cards.get(i).getValue() == 1) {
 
             if (cards.get(i + 1).getValue() - max.getValue() == 0) {
                 return max.getValue();
             }
             i++;
-
         }
-
         i = 0;
-
         if (max.getValue() - cards.get(i).getValue() == 12) {
             while (cards.get(i + 1).getValue() - cards.get(i).getValue() == 1) {
                 if (cards.get(i + 1).getValue() - 5 == 0) {
@@ -199,21 +191,13 @@ class Hand {
             }
         }
         return -1;
-
     }
 
     /**
-     * @return the type1
+     * @return the type
      */
-    CombinationType getType1() {
-        return type1;
-    }
-
-    /**
-     * @return the type2
-     */
-    CombinationType getType2() {
-        return type2;
+    CombinationType getType() {
+        return this.type;
     }
 
     /**
@@ -221,7 +205,8 @@ class Hand {
      *
      * @param hand
      */
-    void detectHandPatterns(Hand hand) {
-        this.type1 = checkHandType(hand.getHand());
+    CombinationType getHandPattern() {
+        this.type = checkHandType(hand);
+        return this.type;
     }
 }

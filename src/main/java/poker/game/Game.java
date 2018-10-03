@@ -51,17 +51,9 @@ public class Game {
      *
      */
     public void identifyTheWinner() {
-        referee.establishTheWinner(player.get(Player.FIRST.ordinal()), player.get(Player.SECOND.ordinal()));
-    }
-
-    /**
-     * Check the possible combinaison in both hands
-     *
-     */
-    public void computeTheHands() {
         Hand firstPlayer = player.get(Player.FIRST.ordinal());
         Hand secondPlayer = player.get(Player.SECOND.ordinal());
-        referee.checkHandsCombination(firstPlayer, secondPlayer);
+        referee.establishTheWinner(firstPlayer, secondPlayer);
     }
 
     private ArrayList<String> readEntry(int player) {

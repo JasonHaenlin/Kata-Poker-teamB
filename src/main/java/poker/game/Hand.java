@@ -61,10 +61,12 @@ class Hand {
      * @return the highest combition found
      */
     CombinationType checkHandType(List<Card> cards) {
-        if (isFullDetected(cards)[0] != -1) {
-            return CombinationType.FULL;
-        } else if (isFourOfAKindDetected(cards) != -1) {
+        if (isFourOfAKindDetected(cards) != -1) {
             return CombinationType.FOUR_OF_A_KIND;
+        } else if (isFullDetected(cards)[0] != -1) {
+            return CombinationType.FULL;
+        } else if (isStraight(cards) != -1) {
+            return CombinationType.STRAIGHT;
         } else if (isTreeOfAKindDetected(cards) != -1) {
             return CombinationType.TREE_OF_A_KIND;
         } else if (isPairDetected(cards) != -1) {

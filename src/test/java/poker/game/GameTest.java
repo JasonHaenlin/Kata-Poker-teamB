@@ -43,7 +43,7 @@ public class GameTest {
     public void buildingDeckValidTest() {
         // cards in the right value of range
         try {
-            hand.buildNewHand(new ArrayList<>(Arrays.asList("2Pi", "2Pi", "3Ca", "7Ca", "5Ca")));
+            hand.buildNewHand(new ArrayList<>(Arrays.asList("2Ca", "2Pi", "3Ca", "7Ca", "5Ca")));
         } catch (Exception e) {
             fail("first test should have passed");
         }
@@ -53,7 +53,7 @@ public class GameTest {
             fail("second test should have passed");
         }
         try {
-            hand.buildNewHand(new ArrayList<>(Arrays.asList("9Tr", "9Tr", "7Tr", "9Tr", "10Pi")));
+            hand.buildNewHand(new ArrayList<>(Arrays.asList("9Tr", "9Ca", "7Tr", "9Co", "10Pi")));
         } catch (Exception e) {
             fail("third test should have passed");
         }

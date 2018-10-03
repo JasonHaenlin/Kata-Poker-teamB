@@ -19,10 +19,6 @@ enum CardColor {
         return this.cardColor;
     }
 
-    public String getAcronym() {
-        return this.cardColor.substring(0, 1);
-    }
-
     public static CardColor getEnum(String strToEnum) {
         switch (strToEnum) {
         case "Tr":

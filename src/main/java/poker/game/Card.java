@@ -35,7 +35,29 @@ class Card {
             return false;
         }
         Card card = (Card) obj;
+        return this.value == card.value && this.color == card.color;
+    }
+
+    boolean equalsValue(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Card)) {
+            return false;
+        }
+        Card card = (Card) obj;
         return this.value == card.value;
+    }
+
+    boolean equalsColor(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Card)) {
+            return false;
+        }
+        Card card = (Card) obj;
+        return this.color == card.color;
     }
 
     /**
@@ -50,5 +72,10 @@ class Card {
      */
     public CardColor getColor() {
         return color;
+    }
+
+    @Override
+    public String toString() {
+        return "[value: " + this.value.toString() + ", color: " + this.color.toString() + "]";
     }
 }

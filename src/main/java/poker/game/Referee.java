@@ -27,6 +27,7 @@ class Referee {
 	 * @param hand2
 	 */
 	int establishTheWinner(Hand hand1, Hand hand2) {
+		checkForDuplicateCards(hand1, hand2);
 		CombinationType c1, c2;
 		c1 = hand1.getHandPattern();
 		c2 = hand2.getHandPattern();
@@ -38,8 +39,15 @@ class Referee {
 			winnerMsg = "La main 1 gagne " + c1.toString();
 			return 1;
 		} else {
-			winnerMsg = "Les deux mains sont du mÃªme type";
+			winnerMsg = "Les deux mains sont du même type";
 			return 0;
+		}
+	}
+
+	public void checkForDuplicateCards(Hand hand1, Hand hand2) {
+		for (Card card1 : hand1.getHand()) {
+			if (hand2.getHand().contains(card1))
+				throw new RuntimeException("Les doublons ne sont pas autorise entre deux mains " + card1.toString());
 		}
 	}
 

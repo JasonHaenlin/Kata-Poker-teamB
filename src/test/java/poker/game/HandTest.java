@@ -53,7 +53,7 @@ public class HandTest {
     public void tooMuchCardsInHandTest() {
         // 6 cards ... it's too much for our game
         try {
-            hand.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "DCa", "5Co", "6Co", "6Co", "10Ca")));
+            hand.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "DCa", "5Co", "6Co", "7Co", "10Ca")));
             fail("This test should have failed");
         } catch (Exception e) {
         }
@@ -72,73 +72,73 @@ public class HandTest {
     @Test
     public void testPair() {
         // pair in hand
-        hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "DCa", "5Co", "6Pi")));
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "DCa", "5Co", "6Pi")));
         assertEquals(7, hand1.isPairDetected(hand1.getHand()));
         /// no pair in hand
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "5Co", "6Pi")));
         assertEquals(-1, hand2.isPairDetected(hand2.getHand()));
         // other pair
-        hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "9Ca", "DCa", "8Tr", "8Tr")));
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "9Ca", "DCa", "8Pi", "8Tr")));
         assertEquals(8, hand5.isPairDetected(hand5.getHand()));
     }
 
     @Test
     public void testThreeOfAKind() {
         // not a ThreeOfAkind just a pair
-        hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "DCa", "5Co", "6Pi")));
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Pi", "DCa", "5Co", "6Pi")));
         assertEquals(-1, hand1.isTreeOfAKindDetected(hand1.getHand()));
         // nothing in the hand (just highest card)
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "5Co", "6Pi")));
         assertEquals(-1, hand2.isTreeOfAKindDetected(hand2.getHand()));
         // a ThreeOfAKind is present
-        hand3.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "7Tr", "7Tr")));
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "7Ca", "7Pi")));
         assertEquals(7, hand3.isTreeOfAKindDetected(hand3.getHand()));
         // just Two pair
-        hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "DCa", "8Tr", "8Tr")));
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "DCa", "8Tr", "8Ca")));
         assertEquals(-1, hand5.isTreeOfAKindDetected(hand5.getHand()));
     }
 
     @Test
     public void testFourOfAKind() {
         // not a FourOfAKind just a pair
-        hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "DCa", "5Co", "6Pi")));
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Ca", "7Tr", "DCa", "5Co", "6Pi")));
         assertEquals(-1, hand1.isFourOfAKindDetected(hand1.getHand()));
         // nothing in the hand (just highest card)
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "5Co", "6Pi")));
         assertEquals(-1, hand2.isFourOfAKindDetected(hand2.getHand()));
         // a FourOfAKind is not present
-        hand3.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "7Tr", "7Tr")));
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "7Pi", "7Ca")));
         assertEquals(-1, hand3.isFourOfAKindDetected(hand3.getHand()));
         // bingo !
-        hand4.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "DCa", "7Tr", "7Tr")));
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("7Co", "7Ca", "DCa", "7Tr", "7Pi")));
         assertEquals(7, hand4.isFourOfAKindDetected(hand4.getHand()));
         // just Two pair
-        hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "DCa", "8Tr", "8Tr")));
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Co", "DCa", "8Co", "8Tr")));
         assertEquals(-1, hand5.isFourOfAKindDetected(hand5.getHand()));
     }
 
     @Test
     public void testFull() {
         //Test avec une pair
-        hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "10Pi", "VTr", "DCa")));
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Co", "7Tr", "10Pi", "VTr", "DCa")));
         assertArrayEquals(new int[] { -1, -1 }, hand1.isFullDetected(hand1.getHand()));
         //Test avec brelan
-        hand2.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "7Tr", "5Co", "6Pi")));
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("7Co", "7Ca", "7Tr", "5Co", "6Pi")));
         assertArrayEquals(new int[] { -1, -1 }, hand2.isFullDetected(hand2.getHand()));
         //Test full 7 par les 8
-        hand3.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "7Tr", "8Tr", "8Tr")));
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "7Pi", "8Ca", "8Tr")));
         assertArrayEquals(new int[] { 7, 8 }, hand3.isFullDetected(hand3.getHand()));
         //Test full 8 par les 7
-        hand4.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "8Tr", "8Tr", "8Tr")));
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "8Ca", "8Pi", "8Tr")));
         assertArrayEquals(new int[] { 8, 7 }, hand4.isFullDetected(hand4.getHand()));
         //Test avec carree
-        hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "7Tr", "7Tr", "8Tr")));
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "7Co", "7Pi", "8Tr")));
         assertArrayEquals(new int[] { -1, -1 }, hand5.isFullDetected(hand5.getHand()));
         //Test avec pair
-        hand6.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "9Ca", "VTr", "10Pi")));
+        hand6.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Pi", "9Ca", "VTr", "10Pi")));
         assertArrayEquals(new int[] { -1, -1 }, hand6.isFullDetected(hand6.getHand()));
         // Test double pair
-        hand7.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Tr", "9Ca", "9Ca", "10Pi")));
+        hand7.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Pi", "9Ca", "9Pi", "10Pi")));
         assertArrayEquals(new int[] { -1, -1 }, hand7.isFullDetected(hand7.getHand()));
     }
 

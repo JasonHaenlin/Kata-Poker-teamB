@@ -26,7 +26,10 @@ class Hand {
         }
         hand = new ArrayList<>();
         for (String card : listCard) {
-            hand.add(new Card(extractValue(card), extractColor(card)));
+            Card nCard = new Card(extractValue(card), extractColor(card));
+            if (hand.contains(nCard))
+                throw new RuntimeException("Les doublons ne sont pas autorisé dans la main " + nCard.toString());
+            hand.add(nCard);
         }
         hand.sort((Card c1, Card c2) -> Integer.compare(c1.getValue(), c2.getValue()));
     }
@@ -96,7 +99,7 @@ class Hand {
     int isPairDetected(List<Card> cards) {
         Card prevCard = null;
         for (Card currCard : cards) {
-            if (currCard.equals(prevCard)) {
+            if (currCard.equalsValue(prevCard)) {
                 return currCard.getValue();
             }
             prevCard = currCard;
@@ -118,13 +121,13 @@ class Hand {
         Card third = cards.get(2);
         Card fourth = cards.get(3);
         Card fifth = cards.get(4);
-        if (first.equals(second) && second.equals(third) && !third.equals(fourth)) {
+        if (first.equalsValue(second) && second.equalsValue(third) && !third.equalsValue(fourth)) {
             return first.getValue();
         }
-        if (!first.equals(second) && second.equals(third) && third.equals(fourth) && !fourth.equals(fifth)) {
+        if (!first.equalsValue(second) && second.equalsValue(third) && third.equalsValue(fourth) && !fourth.equalsValue(fifth)) {
             return second.getValue();
         }
-        if (!second.equals(third) && third.equals(fourth) && fourth.equals(fifth)) {
+        if (!second.equalsValue(third) && third.equalsValue(fourth) && fourth.equalsValue(fifth)) {
             return third.getValue();
         }
         return -1;
@@ -143,10 +146,10 @@ class Hand {
         Card third = cards.get(2);
         Card fourth = cards.get(3);
         Card fifth = cards.get(4);
-        if (first.equals(second) && second.equals(third) && third.equals(fourth) && !fourth.equals(fifth)) {
+        if (first.equalsValue(second) && second.equalsValue(third) && third.equalsValue(fourth) && !fourth.equalsValue(fifth)) {
             return first.getValue();
         }
-        if (!first.equals(second) && second.equals(third) && third.equals(fourth) && fourth.equals(fifth)) {
+        if (!first.equalsValue(second) && second.equalsValue(third) && third.equalsValue(fourth) && fourth.equalsValue(fifth)) {
             return second.getValue();
         }
         return -1;

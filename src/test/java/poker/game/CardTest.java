@@ -38,10 +38,10 @@ public class CardTest {
 
         // same references, because same value
         assertEquals(card1, card2);
-        assertTrue(card1.equals(card2));
+        assertTrue(card1.equalsValue(card2));
 
         // not the same references
-        assertFalse(card1.equals(card3));
+        assertFalse(card1.equalsValue(card3));
     }
 
 }

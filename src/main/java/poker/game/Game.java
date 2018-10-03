@@ -51,7 +51,7 @@ public class Game {
      *
      */
     public void identifyTheWinner() {
-        referee.establishTheWinner(player.get());
+        referee.establishTheWinner(player.get(Player.FIRST.ordinal()), player.get(Player.SECOND.ordinal()));
     }
 
     /**

@@ -217,7 +217,7 @@ class Hand {
     /**
      * Identify the pattern of the hand
      *
-     * @param hand1
+     * @param hand
      */
     void detectHandPatterns(Hand hand) {
         this.type1 = checkHandType(hand.getHand());

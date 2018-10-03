@@ -23,11 +23,13 @@ class Referee {
 	 * <strong>printResultOfTheGame()</strong> to display the result.
 	 * 
 	 * @return
+	 * @param hand1
+	 * @param hand2
 	 */
-	int establishTheWinner() {
+	int establishTheWinner(Hand hand1, Hand hand2) {
 		CombinationType c1, c2;
-		c1 = detection.getType1();
-		c2 = detection.getType2();
+		c1 = hand1.getType1();
+		c2 = hand2.getType2();
 		if (c1.ordinal() < c2.ordinal()) {
 			winnerMsg = "La main 2 gagne avec : " + c2.toString();
 			return 2;

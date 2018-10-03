@@ -42,9 +42,10 @@ public class WinnerTest {
 		assertEquals(0, winner(hand1, hand2));
 	}
 
+	//TODO check cette méthode
 	private int winner(Hand hand1, Hand hand2) {
 		referee.checkHandsCombination(hand1, hand2);
-		return referee.establishTheWinner();
+		return referee.establishTheWinner(hand1, hand2);
 	}
 
 	@Test

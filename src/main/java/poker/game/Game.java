@@ -55,7 +55,7 @@ public class Game {
     }
 
     /**
-     * Check the possible compbinaison in both hands
+     * Check the possible combinaison in both hands
      *
      */
     public void computeTheHands() {

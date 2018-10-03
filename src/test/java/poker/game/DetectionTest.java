@@ -1,5 +1,6 @@
 package poker.game;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
@@ -10,7 +11,7 @@ import java.util.Arrays;
 
 public class DetectionTest {
 
-    Hand hand1, hand2, hand3, hand4, hand5;
+    Hand hand1, hand2, hand3, hand4, hand5, hand6, hand7;
     Detection detection;
 
     @Before
@@ -22,6 +23,8 @@ public class DetectionTest {
         hand3 = new Hand(1);
         hand4 = new Hand(1);
         hand5 = new Hand(1);
+        hand6 = new Hand(1);
+        hand7 = new Hand(1);
     }
 
     @Test
@@ -70,5 +73,32 @@ public class DetectionTest {
         // just Two pair
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "8", "8")));
         assertEquals(-1, detection.isFourOfAKindDetected(hand5.getHand()));
+    }
+
+    @Test
+    public void testFull()
+    {
+        //Test avec une pair
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "10", "11", "12")));
+        assertArrayEquals(new int[] {-1,-1}, detection.isFullDetected(hand1.getHand()));
+        //Test avec brelan
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "7", "5", "6")));
+        assertArrayEquals(new int[] {-1,-1} , detection.isFullDetected(hand2.getHand()));
+        //Test full 7 par les 8
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "7", "8", "8")));
+        assertArrayEquals(new int[] {7,8}, detection.isFullDetected(hand3.getHand()));
+        //Test full 8 par les 7
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "8", "8", "8")));
+        assertArrayEquals(new int[] {8,7}, detection.isFullDetected(hand4.getHand()));
+        //Test avec carree
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "7", "7", "8")));
+        assertArrayEquals(new int[] {-1,-1} , detection.isFullDetected(hand5.getHand()));
+        //Test avec pair
+        hand6.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "9", "11", "10")));
+        assertArrayEquals(new int[] {-1,-1} , detection.isFullDetected(hand6.getHand()));
+        // Test double pair
+        hand7.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "9", "9", "10")));
+        assertArrayEquals(new int[] {-1,-1} , detection.isFullDetected(hand7.getHand()));
+
     }
 }

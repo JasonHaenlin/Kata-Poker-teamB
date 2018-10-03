@@ -16,7 +16,7 @@ class Detection {
 
     /**
      * Identify the pattern of the hands
-     * 
+     *
      * @param hand1
      * @param hand2
      */
@@ -27,12 +27,14 @@ class Detection {
 
     /**
      * Check every cards of a hand to see if a pattern is found.
-     * 
+     *
      * @param cards
      * @return the highest combition found
      */
     CombinationType checkHandType(List<Card> cards) {
-        if (isFourOfAKindDetected(cards) != -1) {
+        if(isFullDetected(cards)[0] != -1) {
+            return CombinationType.FULL;
+        } else if (isFourOfAKindDetected(cards) != -1) {
             return CombinationType.FOUR_OF_A_KIND;
         } else if (isTreeOfAKindDetected(cards) != -1) {
             return CombinationType.TREE_OF_A_KIND;
@@ -46,7 +48,7 @@ class Detection {
     /**
      * If two cards of the same value are found we return that value. This method
      * doesn't check if a higher pattern is present.
-     * 
+     *
      * @param hand
      * @return -1 if no pair has been found, return the value of the pair otherwise.
      */
@@ -64,10 +66,10 @@ class Detection {
     /**
      * If tree cards of the same value are found we return that value. This method
      * doesn't check if a higher pattern is present.
-     * 
+     *
      * @param hand
      * @return -1 if no tree of a kind has been found, return the value of the
-     *         pattern otherwise.
+     * pattern otherwise.
      */
     int isTreeOfAKindDetected(List<Card> cards) {
         Card first = cards.get(0);
@@ -89,10 +91,10 @@ class Detection {
 
     /**
      * If four cards of the same value are found we return that value.
-     * 
+     *
      * @param hand
      * @return -1 if no four of a kind has been found, return the value of the
-     *         pattern otherwise.
+     * pattern otherwise.
      */
     int isFourOfAKindDetected(List<Card> cards) {
         Card first = cards.get(0);
@@ -110,6 +112,33 @@ class Detection {
     }
 
     /**
+     *
+     * @param cards
+     * @return {-,-1} if no full has been found, return a tables with value of three of
+     * kind and value of pair
+     */
+    int[] isFullDetected(List<Card> cards) {
+        int tok = isTreeOfAKindDetected(cards);
+        int full[] = {-1,-1};
+        int val = 0;
+
+        if (tok != -1) {
+            for (int i = 0; i < 5; i++) {
+                int valCard = cards.get(i).getValue();
+                if (valCard != tok) {
+                    if (val == 0) {
+                        val = valCard;
+                    } else if (val == valCard) {
+                        full[0] = tok;
+                        full[1] = val;
+                    }
+                }
+            }
+        }
+        return full;
+    }
+
+    /**
      * @return the type1
      */
     CombinationType getType1() {
@@ -122,4 +151,5 @@ class Detection {
     CombinationType getType2() {
         return type2;
     }
+
 }

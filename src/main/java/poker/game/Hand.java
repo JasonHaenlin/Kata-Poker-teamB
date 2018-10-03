@@ -18,9 +18,7 @@ class Hand {
     /**
      * create a new hand of cards
      *
-     * @return false if the entry is wrong, true otherwise
      * @throws Exception
-     * @throws NumberFormatException
      */
     void buildNewHand(List<String> listCard) {
         if (!check(listCard)) {
@@ -28,9 +26,24 @@ class Hand {
         }
         hand = new ArrayList<>();
         for (String card : listCard) {
-            hand.add(new Card(Integer.parseInt(card)));
+            hand.add(new Card(extractValue(card), extractColor(card)));
         }
         hand.sort((Card c1, Card c2) -> Integer.compare(c1.getValue(), c2.getValue()));
+    }
+
+    private CardColor extractColor(String card) {
+        checkSize(card);
+        return CardColor.getEnum(card.substring(card.length() - 2));
+    }
+
+    private CardValue extractValue(String card) {
+        checkSize(card);
+        return CardValue.getEnum(card.substring(0, card.length() - 2));
+    }
+
+    private void checkSize(String card) {
+        if (card.length() < 3)
+            throw new RuntimeException("mauvaise saisie de la main");
     }
 
     /**

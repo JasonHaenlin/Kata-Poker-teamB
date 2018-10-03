@@ -2,40 +2,22 @@ package poker.game;
 
 class Card {
 
-    private int value;
+    private CardValue value;
+    private CardColor color;
 
     /**
-     * entry between 2 and 14 (error otherwise)
      * 
      * @param value
-     * @throws Exception
+     * @param color
      */
-    Card(int value) {
+    Card(CardValue value, CardColor color) {
         this.value = value;
-        if (!this.isCardCorrect()) {
-            throw new RuntimeException("Erreur lors de la saisie d'une ou plusieurs cartes");
-        }
-    }
-
-    /**
-     * @return the value
-     */
-    int getValue() {
-        return value;
-    }
-
-    /**
-     * isCardCorrrect if the entry is correct
-     * 
-     * @return true if it's correct, false otherwise
-     */
-    private boolean isCardCorrect() {
-        return 2 <= this.value && this.value <= 14;
+        this.color = color;
     }
 
     @Override
     public int hashCode() {
-        return this.value;
+        return this.value.getValue();
     }
 
     /**
@@ -54,5 +36,19 @@ class Card {
         }
         Card card = (Card) obj;
         return this.value == card.value;
+    }
+
+    /**
+     * @return the value
+     */
+    int getValue() {
+        return value.getValue();
+    }
+
+    /**
+     * @return the color
+     */
+    public CardColor getColor() {
+        return color;
     }
 }

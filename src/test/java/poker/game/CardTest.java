@@ -11,14 +11,20 @@ public class CardTest {
 
     @Test
     public void cardTest() {
-        // cards between 2 and 14 included
         try {
-            new Card(1);
+            new Card(CardValue.getEnum("1"), CardColor.SPADE);
             fail("should have failed");
         } catch (Exception e) {
         }
+
         try {
-            new Card(5);
+            new Card(CardValue.C_3, CardColor.getEnum("ir"));
+            fail("should have failed");
+        } catch (Exception e) {
+        }
+
+        try {
+            new Card(CardValue.getEnum("5"), CardColor.getEnum("Tr"));
         } catch (Exception e) {
             fail("should have passed");
         }
@@ -26,9 +32,9 @@ public class CardTest {
 
     @Test
     public void CardObjTest() {
-        Card card1 = new Card(14);
-        Card card2 = new Card(14);
-        Card card3 = new Card(7);
+        Card card1 = new Card(CardValue.C_10, CardColor.HEART);
+        Card card2 = new Card(CardValue.C_10, CardColor.HEART);
+        Card card3 = new Card(CardValue.C_3, CardColor.HEART);
 
         // same references, because same value
         assertEquals(card1, card2);

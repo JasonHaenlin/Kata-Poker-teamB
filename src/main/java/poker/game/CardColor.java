@@ -1,6 +1,6 @@
 package poker.game;
 
-enum ColorType {
+enum CardColor {
     // @formatter:off   
     HEART("Coeur"),
     CLOVER("Trefle"),
@@ -10,8 +10,8 @@ enum ColorType {
 
     private String cardColor = "";
 
-    ColorType(String cardColor) {
-        this.cardColor = cardColor;
+    CardColor(String CardColor) {
+        this.cardColor = CardColor;
     }
 
     @Override
@@ -23,16 +23,16 @@ enum ColorType {
         return this.cardColor.substring(0, 1);
     }
 
-    public static ColorType getEnum(String strToEnum) {
+    public static CardColor getEnum(String strToEnum) {
         switch (strToEnum) {
         case "Tr":
-            return ColorType.CLOVER;
+            return CardColor.CLOVER;
         case "Co":
-            return ColorType.HEART;
+            return CardColor.HEART;
         case "Ca":
-            return ColorType.SQUARE;
+            return CardColor.SQUARE;
         case "Pi":
-            return ColorType.SPADE;
+            return CardColor.SPADE;
         default:
             throw new RuntimeException("Couleur non reconnue");
         }

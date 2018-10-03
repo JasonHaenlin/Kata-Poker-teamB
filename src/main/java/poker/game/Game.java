@@ -46,8 +46,7 @@ public class Game {
     }
 
     /**
-     * identidy the winner after both players hands has been check by
-     * <strong>computeTheHand()</strong>
+     * identidy the winner after both players hands has been check
      *
      */
     public void identifyTheWinner() {

@@ -6,11 +6,9 @@ package poker.game;
 class Referee {
 
 	private String winnerMsg;
-	private Detection detection;
 
 	Referee() {
 		this.winnerMsg = "";
-		detection = new Detection();
 	}
 
 	/**
@@ -42,6 +40,8 @@ class Referee {
 		}
 	}
 
+
+
 	/**
 	 * Check the possible combinaison on each hand.
 	 * 
@@ -49,7 +49,8 @@ class Referee {
 	 * @param hand2
 	 */
 	void checkHandsCombination(Hand hand1, Hand hand2) {
-		detection.detectHandsPatterns(hand1, hand2);
+		hand1.detectHandPatterns(hand1);
+		hand2.detectHandPatterns(hand2);
 	}
 
 }

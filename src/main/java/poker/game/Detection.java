@@ -32,7 +32,7 @@ class Detection {
      * @return the highest combition found
      */
     CombinationType checkHandType(List<Card> cards) {
-        if(isFullDetected(cards)[0] != -1) {
+        if (isFullDetected(cards)[0] != -1) {
             return CombinationType.FULL;
         } else if (isFourOfAKindDetected(cards) != -1) {
             return CombinationType.FOUR_OF_A_KIND;
@@ -49,7 +49,7 @@ class Detection {
      * If two cards of the same value are found we return that value. This method
      * doesn't check if a higher pattern is present.
      *
-     * @param hand
+     * @param cards
      * @return -1 if no pair has been found, return the value of the pair otherwise.
      */
     int isPairDetected(List<Card> cards) {
@@ -67,7 +67,7 @@ class Detection {
      * If tree cards of the same value are found we return that value. This method
      * doesn't check if a higher pattern is present.
      *
-     * @param hand
+     * @param cards
      * @return -1 if no tree of a kind has been found, return the value of the
      * pattern otherwise.
      */
@@ -92,7 +92,7 @@ class Detection {
     /**
      * If four cards of the same value are found we return that value.
      *
-     * @param hand
+     * @param cards
      * @return -1 if no four of a kind has been found, return the value of the
      * pattern otherwise.
      */
@@ -112,14 +112,13 @@ class Detection {
     }
 
     /**
-     *
      * @param cards
      * @return {-,-1} if no full has been found, return a tables with value of three of
      * kind and value of pair
      */
     int[] isFullDetected(List<Card> cards) {
         int tok = isTreeOfAKindDetected(cards);
-        int full[] = {-1,-1};
+        int full[] = {-1, -1};
         int val = 0;
 
         if (tok != -1) {
@@ -136,6 +135,40 @@ class Detection {
             }
         }
         return full;
+    }
+
+    /**
+     * @param cards
+     * @return -1 if no straight has been found or return the highest value of the straight.
+     */
+    int isStraight(List<Card> cards) {
+
+
+        int longueur = cards.size();
+        Card max = cards.get(longueur - 1);
+        int i = 0;
+
+        while (cards.get(i + 1).getValue() - cards.get(i).getValue() == 1) {
+
+            if (cards.get(i + 1).getValue() - max.getValue() == 0) {
+                return max.getValue();
+            }
+            i++;
+
+        }
+
+        i = 0;
+
+        if (max.getValue() - cards.get(i).getValue() == 12) {
+            while (cards.get(i + 1).getValue() - cards.get(i).getValue() == 1) {
+                if (cards.get(i + 1).getValue() - 5 == 0) {
+                    return 5;
+                }
+                i++;
+            }
+        }
+        return -1;
+
     }
 
     /**

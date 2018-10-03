@@ -16,7 +16,7 @@ class Detection {
 
     /**
      * Identify the pattern of the hands
-     * 
+     *
      * @param hand1
      * @param hand2
      */
@@ -27,7 +27,7 @@ class Detection {
 
     /**
      * Check every cards of a hand to see if a pattern is found.
-     * 
+     *
      * @param cards
      * @return the highest combition found
      */
@@ -46,7 +46,7 @@ class Detection {
     /**
      * If two cards of the same value are found we return that value. This method
      * doesn't check if a higher pattern is present.
-     * 
+     *
      * @param hand
      * @return -1 if no pair has been found, return the value of the pair otherwise.
      */
@@ -64,10 +64,10 @@ class Detection {
     /**
      * If tree cards of the same value are found we return that value. This method
      * doesn't check if a higher pattern is present.
-     * 
+     *
      * @param hand
      * @return -1 if no tree of a kind has been found, return the value of the
-     *         pattern otherwise.
+     * pattern otherwise.
      */
     int isTreeOfAKindDetected(List<Card> cards) {
         Card first = cards.get(0);
@@ -89,10 +89,10 @@ class Detection {
 
     /**
      * If four cards of the same value are found we return that value.
-     * 
+     *
      * @param hand
      * @return -1 if no four of a kind has been found, return the value of the
-     *         pattern otherwise.
+     * pattern otherwise.
      */
     int isFourOfAKindDetected(List<Card> cards) {
         Card first = cards.get(0);
@@ -107,6 +107,36 @@ class Detection {
             return second.getValue();
         }
         return -1;
+    }
+
+    int isStraight(List<Card> cards) {
+
+
+        int longueur = cards.size();
+        Card max = cards.get(longueur - 1);
+        int i = 0;
+
+        while (cards.get(i + 1).getValue() - cards.get(i).getValue() == 1) {
+
+            if (cards.get(i + 1).getValue() - max.getValue() == 0) {
+                return max.getValue();
+            }
+            i++;
+
+        }
+
+        i = 0;
+
+        if (max.getValue() - cards.get(i).getValue() == 12) {
+            while (cards.get(i + 1).getValue() - cards.get(i).getValue() == 1) {
+                if (cards.get(i + 1).getValue() - 5 == 0) {
+                    return 5;
+                }
+                i++;
+            }
+        }
+        return -1;
+
     }
 
     /**

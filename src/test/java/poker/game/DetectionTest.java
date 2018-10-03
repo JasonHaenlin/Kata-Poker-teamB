@@ -22,6 +22,7 @@ public class DetectionTest {
         hand3 = new Hand(1);
         hand4 = new Hand(1);
         hand5 = new Hand(1);
+
     }
 
     @Test
@@ -70,5 +71,25 @@ public class DetectionTest {
         // just Two pair
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("7", "7", "12", "8", "8")));
         assertEquals(-1, detection.isFourOfAKindDetected(hand5.getHand()));
+    }
+
+    @Test
+    public void testStraight() {
+        // Not a straight
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("3", "7", "12", "5", "6")));
+        assertEquals(-1, detection.isStraight(hand1.getHand()));
+        // nothing in the hand (just highest card)
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("12", "14", "13", "2", "3")));
+        assertEquals(-1, detection.isStraight(hand2.getHand()));
+        // a FourOfAKind is not present
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("14", "4", "2", "5", "3")));
+        assertEquals(5, detection.isStraight(hand3.getHand()));
+        // bingo !
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("11", "13", "14", "12", "10")));
+        assertEquals(14, detection.isStraight(hand4.getHand()));
+        // just Two pair
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("3", "5", "6", "4", "2")));
+        assertEquals(6, detection.isStraight(hand5.getHand()));
+
     }
 }

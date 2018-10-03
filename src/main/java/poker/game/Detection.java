@@ -47,7 +47,7 @@ class Detection {
      * If two cards of the same value are found we return that value. This method
      * doesn't check if a higher pattern is present.
      *
-     * @param hand
+     * @param cards
      * @return -1 if no pair has been found, return the value of the pair otherwise.
      */
     int isPairDetected(List<Card> cards) {
@@ -65,7 +65,7 @@ class Detection {
      * If tree cards of the same value are found we return that value. This method
      * doesn't check if a higher pattern is present.
      *
-     * @param hand
+     * @param cards
      * @return -1 if no tree of a kind has been found, return the value of the
      * pattern otherwise.
      */
@@ -90,7 +90,7 @@ class Detection {
     /**
      * If four cards of the same value are found we return that value.
      *
-     * @param hand
+     * @param  cards
      * @return -1 if no four of a kind has been found, return the value of the
      * pattern otherwise.
      */
@@ -109,6 +109,11 @@ class Detection {
         return -1;
     }
 
+    /**
+     *
+     * @param cards
+     * @return -1 if no straight has been found or return the highest value of the straight.
+     */
     int isStraight(List<Card> cards) {
 
 

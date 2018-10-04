@@ -87,17 +87,17 @@ public class HandTest {
     public void testThreeOfAKind() {
         // not a ThreeOfAkind just a pair
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Pi", "DCa", "5Co", "6Pi")));
-        assertEquals(false, hand1.isTreeOfAKindDetected());
+        assertEquals(false, hand1.isThreeOfAKindDetected());
         // nothing in the hand (just highest card)
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "5Co", "6Pi")));
-        assertEquals(false, hand2.isTreeOfAKindDetected());
+        assertEquals(false, hand2.isThreeOfAKindDetected());
         // a ThreeOfAKind is present
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "7Ca", "7Pi")));
-        assertEquals(true, hand3.isTreeOfAKindDetected());
+        assertEquals(true, hand3.isThreeOfAKindDetected());
         assertEquals(7, hand3.getPatternValue().getValue());
         // just Two pair
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "DCa", "8Tr", "8Ca")));
-        assertEquals(false, hand5.isTreeOfAKindDetected());
+        assertEquals(false, hand5.isThreeOfAKindDetected());
     }
 
     @Test

@@ -1,5 +1,7 @@
 package poker.game;
 
+import java.util.List;
+
 /**
  * This class judge who is the winner
  */
@@ -31,16 +33,68 @@ class Referee {
 		CombinationType c1, c2;
 		c1 = hand1.getHandPattern();
 		c2 = hand2.getHandPattern();
+		List<Card> cardsInHand1 = hand1.getHand();
+		List<Card> cardsInHand2 = hand2.getHand();
 
 		if (c1.ordinal() < c2.ordinal()) {
 			winnerMsg = "La main 2 gagne avec : " + c2.toString();
 			return 2;
 		} else if (c2.ordinal() < c1.ordinal()) {
-			winnerMsg = "La main 1 gagne " + c1.toString();
+			winnerMsg = "La main 1 gagne avec : " + c1.toString();
 			return 1;
 		} else {
 			winnerMsg = "Les deux mains sont du meme type";
-			return 0;
+
+			switch (c1) {
+				case HIGHESTCARD:
+					for (int i = cardsInHand1.size() - 1; i >= 0; i--) {
+						if (cardsInHand1.get(i).getIntValue() < cardsInHand2.get(i).getIntValue()) {
+							winnerMsg = "La main 2 gagne avec : " + c2.toString() + cardsInHand2.get(i).getIntValue();
+							return 2;
+						} else if (cardsInHand1.get(i).getIntValue() > cardsInHand2.get(i).getIntValue()) {
+							winnerMsg = "La main 1 gagne avec : " + c1.toString() + cardsInHand1.get(i).getIntValue();
+							return 1;
+						} else {
+							winnerMsg = "Egalité des mains";
+							return 0;
+						}
+					}
+				case PAIR:
+					if (hand1.getPatternValue().getValue() != hand2.getPatternValue().getValue()) {
+						if (hand1.getPatternValue().getValue() < hand2.getPatternValue().getValue()) {
+							winnerMsg = "La main 2 gagne avec : " + c2.toString() + hand2.getPatternValue().getValue();
+							return 2;
+						} else {
+							winnerMsg = "La main 1 gagne avec : " + c1.toString() + hand1.getPatternValue().getValue();
+							return 1;
+						}
+
+					} else {
+						for (int i = cardsInHand1.size() - 1; i >= 0; i--) {
+							if (cardsInHand1.get(i).getIntValue() < cardsInHand2.get(i).getIntValue()) { //TODO ajouter carte la plus haute dans l'affichage
+								winnerMsg = "La main 2 gagne avec : " + c2.toString() + hand2.getPatternValue().getValue();
+								return 2;
+							} else if (cardsInHand1.get(i).getIntValue() > cardsInHand2.get(i).getIntValue()) { //TODO ajouter carte la plus haute dans l'affichage
+								winnerMsg = "La main 1 gagne avec : " + c1.toString() + hand1.getPatternValue().getValue();
+								return 1;
+							} else {
+								winnerMsg = "Egalité des mains";
+								return 0;
+							}
+						}
+					}
+				default: // for T
+					if (hand1.getPatternValue().getValue() < hand2.getPatternValue().getValue()) {
+						winnerMsg = "La main 2 gagne avec : " + c2.toString() + hand2.getPatternValue().getValue();
+						return 2;
+					} else if (hand1.getPatternValue().getValue() < hand2.getPatternValue().getValue()) {
+						winnerMsg = "La main 1 gagne avec : " + c1.toString() + hand1.getPatternValue().getValue();
+						return 1;
+					} else {
+						winnerMsg = "Egalité des mains";
+						return 0;
+					}
+			}
 		}
 	}
 

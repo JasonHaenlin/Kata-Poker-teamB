@@ -74,7 +74,6 @@ class Hand {
     /**
      * Check every cards of a hand to see if a pattern is found.
      *
-     * @param cards
      * @return the highest combition found
      */
     CombinationType checkHandType() {
@@ -84,8 +83,8 @@ class Hand {
             return CombinationType.FULL;
         } else if (isStraight()) {
             return CombinationType.STRAIGHT;
-        } else if (isTreeOfAKindDetected()) {
-            return CombinationType.TREE_OF_A_KIND;
+        } else if (isThreeOfAKindDetected()) {
+            return CombinationType.THREE_OF_A_KIND;
         } else if (isPairDetected()) {
             return CombinationType.PAIR;
         } else {
@@ -118,7 +117,7 @@ class Hand {
      * @return -1 if no tree of a kind has been found, return the value of the
      *         pattern otherwise.
      */
-    boolean isTreeOfAKindDetected() {
+    boolean isThreeOfAKindDetected() {
         Card first = hand.get(0);
         Card second = hand.get(1);
         Card third = hand.get(2);
@@ -141,7 +140,7 @@ class Hand {
 
     /**
      * If four cards of the same value are found we return that value.
-     *
+     * and sets the patternValue to the value of the four of a kind
      * @return -1 if no four of a kind has been found, return the value of the
      *         pattern otherwise.
      */
@@ -167,7 +166,7 @@ class Hand {
      *         of kind and value of pair
      */
     boolean isFullDetected() {
-        if (!isTreeOfAKindDetected())
+        if (!isThreeOfAKindDetected())
             return false;
         int val = 0;
         int tok = getPatternValue().getValue();
@@ -226,7 +225,6 @@ class Hand {
     /**
      * Identify the pattern of the hand
      *
-     * @param hand
      */
     CombinationType getHandPattern() {
         this.type = checkHandType();

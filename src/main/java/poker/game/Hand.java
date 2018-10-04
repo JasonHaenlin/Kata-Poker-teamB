@@ -81,6 +81,8 @@ class Hand {
             return CombinationType.FOUR_OF_A_KIND;
         } else if (isFullDetected()) {
             return CombinationType.FULL;
+        } else if (isColorDetected()) {
+            return CombinationType.COLOR;
         } else if (isStraight()) {
             return CombinationType.STRAIGHT;
         } else if (isThreeOfAKindDetected()) {
@@ -139,8 +141,9 @@ class Hand {
     }
 
     /**
-     * If four cards of the same value are found we return that value.
-     * and sets the patternValue to the value of the four of a kind
+     * If four cards of the same value are found we return that value. and sets the
+     * patternValue to the value of the four of a kind
+     * 
      * @return -1 if no four of a kind has been found, return the value of the
      *         pattern otherwise.
      */
@@ -213,6 +216,18 @@ class Hand {
             }
         }
         return false;
+    }
+
+    boolean isColorDetected() {
+        Card prev = null;
+        for (Card currCard : hand) {
+            if (!currCard.equalsColor(prev) && prev != null) {
+                return false;
+            }
+            prev = currCard;
+        }
+        setPatternResult(prev);
+        return true;
     }
 
     /**

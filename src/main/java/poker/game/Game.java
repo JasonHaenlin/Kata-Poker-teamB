@@ -34,7 +34,7 @@ public class Game {
      */
     public void readNewEntry(Player player) {
         int numPlayer = player.ordinal();
-        this.player.get(numPlayer).buildNewHand(readEntry(numPlayer + 1)); //Le +1 est uniquement dans l'affichage
+        this.player.get(numPlayer).buildNewHand(readEntry(numPlayer + 1));
     }
 
     /**

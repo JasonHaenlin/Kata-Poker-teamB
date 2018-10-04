@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class RefereeTest {
@@ -36,7 +37,7 @@ public class RefereeTest {
 
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "8Co", "2Pi", "APi", "DTr")));
         //Les deux mains ont une paire
-        assertEquals(0, referee.establishTheWinner(hand1, hand3));
+        assertEquals(2, referee.establishTheWinner(hand1, hand3));
 
         // Ne fonctionne plus avec la gestion des doublons
         // assertEquals(0, referee.establishTheWinner(hand1, hand1));

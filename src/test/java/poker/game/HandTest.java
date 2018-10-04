@@ -169,7 +169,22 @@ public class HandTest {
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("3Ca", "5Co", "6Pi", "4Pi", "2Tr")));
         assertEquals(true, hand5.isStraight());
         assertEquals(6, hand5.getPatternValue().getValue());
+    }
 
+    @Test
+    public void testColor() {
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("3Ca", "4Ca", "10Ca", "ACa", "RCa")));
+        assertEquals(true, hand1.isColorDetected());
+        assertEquals(CardColor.SQUARE, hand1.getPatternColor());
+
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("3Ca", "4Co", "10Ca", "ACa", "RCa")));
+        assertEquals("1 false", false, hand2.isColorDetected());
+
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("3Ca", "4Ca", "10Ca", "ACa", "RTr")));
+        assertEquals("2 false", false, hand3.isColorDetected());
+
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("3Tr", "4Ca", "10Ca", "ACa", "RCa")));
+        assertEquals("3 false", false, hand4.isColorDetected());
     }
 
 }

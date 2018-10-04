@@ -63,14 +63,18 @@ class Card {
     /**
      * @return the value
      */
-    int getValue() {
+    CardValue getValue() {
+        return value;
+    }
+
+    int getIntValue() {
         return value.getValue();
     }
 
     /**
      * @return the color
      */
-    public CardColor getColor() {
+    CardColor getColor() {
         return color;
     }
 

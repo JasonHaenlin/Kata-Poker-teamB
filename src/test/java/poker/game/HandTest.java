@@ -1,6 +1,5 @@
 package poker.game;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -73,92 +72,103 @@ public class HandTest {
     public void testPair() {
         // pair in hand
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "DCa", "5Co", "6Pi")));
-        assertEquals(7, hand1.isPairDetected(hand1.getHand()));
+        assertEquals(true, hand1.isPairDetected());
+        assertEquals(7, hand1.getPatternValue().getValue());
         /// no pair in hand
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "5Co", "6Pi")));
-        assertEquals(-1, hand2.isPairDetected(hand2.getHand()));
+        assertEquals(false, hand2.isPairDetected());
         // other pair
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "9Ca", "DCa", "8Pi", "8Tr")));
-        assertEquals(8, hand5.isPairDetected(hand5.getHand()));
+        assertEquals(true, hand5.isPairDetected());
+        assertEquals(8, hand5.getPatternValue().getValue());
     }
 
     @Test
     public void testThreeOfAKind() {
         // not a ThreeOfAkind just a pair
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Pi", "DCa", "5Co", "6Pi")));
-        assertEquals(-1, hand1.isTreeOfAKindDetected(hand1.getHand()));
+        assertEquals(false, hand1.isTreeOfAKindDetected());
         // nothing in the hand (just highest card)
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "5Co", "6Pi")));
-        assertEquals(-1, hand2.isTreeOfAKindDetected(hand2.getHand()));
+        assertEquals(false, hand2.isTreeOfAKindDetected());
         // a ThreeOfAKind is present
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "7Ca", "7Pi")));
-        assertEquals(7, hand3.isTreeOfAKindDetected(hand3.getHand()));
+        assertEquals(true, hand3.isTreeOfAKindDetected());
+        assertEquals(7, hand3.getPatternValue().getValue());
         // just Two pair
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "DCa", "8Tr", "8Ca")));
-        assertEquals(-1, hand5.isTreeOfAKindDetected(hand5.getHand()));
+        assertEquals(false, hand5.isTreeOfAKindDetected());
     }
 
     @Test
     public void testFourOfAKind() {
         // not a FourOfAKind just a pair
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Ca", "7Tr", "DCa", "5Co", "6Pi")));
-        assertEquals(-1, hand1.isFourOfAKindDetected(hand1.getHand()));
+        assertEquals(false, hand1.isFourOfAKindDetected());
         // nothing in the hand (just highest card)
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "5Co", "6Pi")));
-        assertEquals(-1, hand2.isFourOfAKindDetected(hand2.getHand()));
+        assertEquals(false, hand2.isFourOfAKindDetected());
         // a FourOfAKind is not present
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Pi", "DCa", "7Pi", "7Ca")));
-        assertEquals(-1, hand3.isFourOfAKindDetected(hand3.getHand()));
+        assertEquals(false, hand3.isFourOfAKindDetected());
         // bingo !
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("7Co", "7Ca", "DCa", "7Tr", "7Pi")));
-        assertEquals(7, hand4.isFourOfAKindDetected(hand4.getHand()));
+        assertEquals(true, hand4.isFourOfAKindDetected());
+        assertEquals(7, hand4.getPatternValue().getValue());
         // just Two pair
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Co", "DCa", "8Co", "8Tr")));
-        assertEquals(-1, hand5.isFourOfAKindDetected(hand5.getHand()));
+        assertEquals(false, hand5.isFourOfAKindDetected());
     }
 
     @Test
     public void testFull() {
         //Test avec une pair
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Co", "7Tr", "10Pi", "VTr", "DCa")));
-        assertArrayEquals(new int[] { -1, -1 }, hand1.isFullDetected(hand1.getHand()));
+        assertEquals(false, hand1.isFullDetected());
         //Test avec brelan
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("7Co", "7Ca", "7Tr", "5Co", "6Pi")));
-        assertArrayEquals(new int[] { -1, -1 }, hand2.isFullDetected(hand2.getHand()));
+        assertEquals(false, hand2.isFullDetected());
         //Test full 7 par les 8
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "7Pi", "8Ca", "8Tr")));
-        assertArrayEquals(new int[] { 7, 8 }, hand3.isFullDetected(hand3.getHand()));
+        assertEquals(true, hand3.isFullDetected());
+        assertEquals(7, hand3.getPatternValue().getValue());
+        assertEquals(8, hand3.getPatternValueExtra().getValue());
         //Test full 8 par les 7
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "8Ca", "8Pi", "8Tr")));
-        assertArrayEquals(new int[] { 8, 7 }, hand4.isFullDetected(hand4.getHand()));
+        assertEquals(true, hand4.isFullDetected());
+        assertEquals(8, hand4.getPatternValue().getValue());
+        assertEquals(7, hand4.getPatternValueExtra().getValue());
         //Test avec carree
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "7Co", "7Pi", "8Tr")));
-        assertArrayEquals(new int[] { -1, -1 }, hand5.isFullDetected(hand5.getHand()));
+        assertEquals(false, hand5.isFullDetected());
         //Test avec pair
         hand6.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Pi", "9Ca", "VTr", "10Pi")));
-        assertArrayEquals(new int[] { -1, -1 }, hand6.isFullDetected(hand6.getHand()));
+        assertEquals(false, hand6.isFullDetected());
         // Test double pair
         hand7.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Pi", "9Ca", "9Pi", "10Pi")));
-        assertArrayEquals(new int[] { -1, -1 }, hand7.isFullDetected(hand7.getHand()));
+        assertEquals(false, hand7.isFullDetected());
     }
 
     @Test
     public void testStraight() {
         // Not a straight
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("3Ca", "7Tr", "DCa", "5Co", "6Pi")));
-        assertEquals(-1, hand1.isStraight(hand1.getHand()));
+        assertEquals(false, hand1.isStraight());
         // nothing in the hand (just highest card)
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("DCa", "ATr", "RCo", "2Tr", "3Ca")));
-        assertEquals(-1, hand2.isStraight(hand2.getHand()));
+        assertEquals(false, hand2.isStraight());
         // a FourOfAKind is not present
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "4Pi", "2Tr", "5Co", "3Ca")));
-        assertEquals(5, hand3.isStraight(hand3.getHand()));
+        assertEquals(true, hand3.isStraight());
+        assertEquals(5, hand3.getPatternValue().getValue());
         // bingo !
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("VTr", "RCo", "ATr", "DCa", "10Pi")));
-        assertEquals(14, hand4.isStraight(hand4.getHand()));
+        assertEquals(true, hand4.isStraight());
+        assertEquals(14, hand4.getPatternValue().getValue());
         // just Two pair
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("3Ca", "5Co", "6Pi", "4Pi", "2Tr")));
-        assertEquals(6, hand5.isStraight(hand5.getHand()));
+        assertEquals(true, hand5.isStraight());
+        assertEquals(6, hand5.getPatternValue().getValue());
 
     }
 

@@ -39,7 +39,7 @@ class Referee {
 			winnerMsg = "La main 1 gagne " + c1.toString();
 			return 1;
 		} else {
-			winnerMsg = "Les deux mains sont du même type";
+			winnerMsg = "Les deux mains sont du meme type";
 			return 0;
 		}
 	}

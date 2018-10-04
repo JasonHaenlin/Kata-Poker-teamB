@@ -10,6 +10,10 @@ class Hand {
     private List<Card> hand;
     private int handNumber;
 
+    private CardValue patternValue = null;
+    private CardValue patternValueExtra = null;
+    private CardColor patternColor = null;
+
     Hand(int handNumber) {
         this.handNumber = handNumber;
         this.type = CombinationType.HIGHESTCARD;
@@ -28,10 +32,10 @@ class Hand {
         for (String card : listCard) {
             Card nCard = new Card(extractValue(card), extractColor(card));
             if (hand.contains(nCard))
-                throw new RuntimeException("Les doublons ne sont pas autorisé dans la main " + nCard.toString());
+                throw new RuntimeException("Les doublons ne sont pas autorise dans la main " + nCard.toString());
             hand.add(nCard);
         }
-        hand.sort((Card c1, Card c2) -> Integer.compare(c1.getValue(), c2.getValue()));
+        hand.sort((Card c1, Card c2) -> Integer.compare(c1.getIntValue(), c2.getIntValue()));
     }
 
     private CardColor extractColor(String card) {
@@ -73,16 +77,16 @@ class Hand {
      * @param cards
      * @return the highest combition found
      */
-    CombinationType checkHandType(List<Card> cards) {
-        if (isFourOfAKindDetected(cards) != -1) {
+    CombinationType checkHandType() {
+        if (isFourOfAKindDetected()) {
             return CombinationType.FOUR_OF_A_KIND;
-        } else if (isFullDetected(cards)[0] != -1) {
+        } else if (isFullDetected()) {
             return CombinationType.FULL;
-        } else if (isStraight(cards) != -1) {
+        } else if (isStraight()) {
             return CombinationType.STRAIGHT;
-        } else if (isTreeOfAKindDetected(cards) != -1) {
+        } else if (isTreeOfAKindDetected()) {
             return CombinationType.TREE_OF_A_KIND;
-        } else if (isPairDetected(cards) != -1) {
+        } else if (isPairDetected()) {
             return CombinationType.PAIR;
         } else {
             return CombinationType.HIGHESTCARD;
@@ -93,120 +97,123 @@ class Hand {
      * If two cards of the same value are found we return that value. This method
      * doesn't check if a higher pattern is present.
      *
-     * @param cards
      * @return -1 if no pair has been found, return the value of the pair otherwise.
      */
-    int isPairDetected(List<Card> cards) {
+    boolean isPairDetected() {
         Card prevCard = null;
-        for (Card currCard : cards) {
+        for (Card currCard : hand) {
             if (currCard.equalsValue(prevCard)) {
-                return currCard.getValue();
+                setPatternResult(currCard);
+                return true;
             }
             prevCard = currCard;
         }
-        return -1;
+        return false;
     }
 
     /**
      * If tree cards of the same value are found we return that value. This method
      * doesn't check if a higher pattern is present.
      *
-     * @param cards
      * @return -1 if no tree of a kind has been found, return the value of the
      *         pattern otherwise.
      */
-    int isTreeOfAKindDetected(List<Card> cards) {
-        Card first = cards.get(0);
-        Card second = cards.get(1);
-        Card third = cards.get(2);
-        Card fourth = cards.get(3);
-        Card fifth = cards.get(4);
+    boolean isTreeOfAKindDetected() {
+        Card first = hand.get(0);
+        Card second = hand.get(1);
+        Card third = hand.get(2);
+        Card fourth = hand.get(3);
+        Card fifth = hand.get(4);
         if (first.equalsValue(second) && second.equalsValue(third) && !third.equalsValue(fourth)) {
-            return first.getValue();
+            setPatternResult(first);
+            return true;
         }
         if (!first.equalsValue(second) && second.equalsValue(third) && third.equalsValue(fourth) && !fourth.equalsValue(fifth)) {
-            return second.getValue();
+            setPatternResult(second);
+            return true;
         }
         if (!second.equalsValue(third) && third.equalsValue(fourth) && fourth.equalsValue(fifth)) {
-            return third.getValue();
+            setPatternResult(third);
+            return true;
         }
-        return -1;
+        return false;
     }
 
     /**
      * If four cards of the same value are found we return that value.
      *
-     * @param cards
      * @return -1 if no four of a kind has been found, return the value of the
      *         pattern otherwise.
      */
-    int isFourOfAKindDetected(List<Card> cards) {
-        Card first = cards.get(0);
-        Card second = cards.get(1);
-        Card third = cards.get(2);
-        Card fourth = cards.get(3);
-        Card fifth = cards.get(4);
+    boolean isFourOfAKindDetected() {
+        Card first = hand.get(0);
+        Card second = hand.get(1);
+        Card third = hand.get(2);
+        Card fourth = hand.get(3);
+        Card fifth = hand.get(4);
         if (first.equalsValue(second) && second.equalsValue(third) && third.equalsValue(fourth) && !fourth.equalsValue(fifth)) {
-            return first.getValue();
+            setPatternResult(first);
+            return true;
         }
         if (!first.equalsValue(second) && second.equalsValue(third) && third.equalsValue(fourth) && fourth.equalsValue(fifth)) {
-            return second.getValue();
+            setPatternResult(second);
+            return true;
         }
-        return -1;
+        return false;
     }
 
     /**
-     * @param cards
      * @return {-,-1} if no full has been found, return a tables with value of three
      *         of kind and value of pair
      */
-    int[] isFullDetected(List<Card> cards) {
-        int tok = isTreeOfAKindDetected(cards);
-        int full[] = { -1, -1 };
+    boolean isFullDetected() {
+        if (!isTreeOfAKindDetected())
+            return false;
         int val = 0;
-
+        int tok = getPatternValue().getValue();
         if (tok != -1) {
             for (int i = 0; i < 5; i++) {
-                int valCard = cards.get(i).getValue();
+                int valCard = hand.get(i).getIntValue();
                 if (valCard != tok) {
                     if (val == 0) {
                         val = valCard;
                     } else if (val == valCard) {
-                        full[0] = tok;
-                        full[1] = val;
+                        setPatternExtraCard(hand.get(i));
+                        return true;
                     }
                 }
             }
         }
-        return full;
+        return false;
     }
 
     /**
-     * @param cards
      * @return -1 if no straight has been found or return the highest value of the
      *         straight.
      */
-    int isStraight(List<Card> cards) {
-        int longueur = cards.size();
-        Card max = cards.get(longueur - 1);
+    boolean isStraight() {
+        int longueur = hand.size();
+        Card max = hand.get(longueur - 1);
         int i = 0;
-        while (cards.get(i + 1).getValue() - cards.get(i).getValue() == 1) {
+        while (hand.get(i + 1).getIntValue() - hand.get(i).getIntValue() == 1) {
 
-            if (cards.get(i + 1).getValue() - max.getValue() == 0) {
-                return max.getValue();
+            if (hand.get(i + 1).getIntValue() - max.getIntValue() == 0) {
+                setPatternResult(max);
+                return true;
             }
             i++;
         }
         i = 0;
-        if (max.getValue() - cards.get(i).getValue() == 12) {
-            while (cards.get(i + 1).getValue() - cards.get(i).getValue() == 1) {
-                if (cards.get(i + 1).getValue() - 5 == 0) {
-                    return 5;
+        if (max.getIntValue() - hand.get(i).getIntValue() == 12) {
+            while (hand.get(i + 1).getIntValue() - hand.get(i).getIntValue() == 1) {
+                if (hand.get(i + 1).getIntValue() - 5 == 0) {
+                    setPatternResult(hand.get(i + 1));
+                    return true;
                 }
                 i++;
             }
         }
-        return -1;
+        return false;
     }
 
     /**
@@ -222,7 +229,38 @@ class Hand {
      * @param hand
      */
     CombinationType getHandPattern() {
-        this.type = checkHandType(hand);
+        this.type = checkHandType();
         return this.type;
     }
+
+    /**
+     * @return the patternColor
+     */
+    CardColor getPatternColor() {
+        return patternColor;
+    }
+
+    /**
+     * @return the patternValue
+     */
+    CardValue getPatternValue() {
+        return patternValue;
+    }
+
+    /**
+     * @return the patternValueExtra
+     */
+    CardValue getPatternValueExtra() {
+        return patternValueExtra;
+    }
+
+    private void setPatternResult(Card cardId) {
+        this.patternColor = cardId.getColor();
+        this.patternValue = cardId.getValue();
+    }
+
+    private void setPatternExtraCard(Card extraCard) {
+        this.patternValueExtra = extraCard.getValue();
+    }
+
 }

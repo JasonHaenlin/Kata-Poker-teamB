@@ -83,11 +83,11 @@ class Referee {
 							}
 						}
 					}
-				default: // for T
+				default: // for Three of a kind, straight, full and four of a kind
 					if (hand1.getPatternValue().getValue() < hand2.getPatternValue().getValue()) {
 						winnerMsg = "La main 2 gagne avec : " + c2.toString() + hand2.getPatternValue().getValue();
 						return 2;
-					} else if (hand1.getPatternValue().getValue() < hand2.getPatternValue().getValue()) {
+					} else if (hand1.getPatternValue().getValue() > hand2.getPatternValue().getValue()) {
 						winnerMsg = "La main 1 gagne avec : " + c1.toString() + hand1.getPatternValue().getValue();
 						return 1;
 					} else {

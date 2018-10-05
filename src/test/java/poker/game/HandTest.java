@@ -121,6 +121,33 @@ public class HandTest {
     }
 
     @Test
+    public void testDoublePair(){
+        //Test avec une pair
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Co", "7Tr", "10Pi", "VTr", "DCa")));
+        assertEquals(false, hand1.isDoublePairDetected());
+        //Test avec brelan
+        /*hand2.buildNewHand(new ArrayList<>(Arrays.asList("7Co", "7Ca", "7Tr", "5Co", "6Pi")));
+        assertEquals(false, hand2.isDoublePairDetected());*/
+        //Test full 7 par les 8
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "7Pi", "8Ca", "8Tr")));
+        assertEquals(false, hand3.isDoublePairDetected());
+        //Test full 8 par les 7
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Ca", "8Ca", "8Pi", "8Tr")));
+        assertEquals(false, hand4.isDoublePairDetected());
+        // Test double pair
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Pi", "9Ca", "9Pi", "10Pi")));
+        assertEquals(true, hand5.isDoublePairDetected());
+        assertEquals(7, hand5.getPatternValue().getValue());
+        assertEquals(9, hand5.getPatternValueExtra().getValue());
+
+        hand6.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "7Pi", "9Ca", "10Pi", "10Ca")));
+        assertEquals(true, hand6.isDoublePairDetected());
+        assertEquals(7, hand6.getPatternValue().getValue());
+        assertEquals(10, hand6.getPatternValueExtra().getValue());
+
+    }
+
+    @Test
     public void testFull() {
         //Test avec une pair
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Co", "7Tr", "10Pi", "VTr", "DCa")));

@@ -4,7 +4,7 @@ enum CombinationType {
 	// @formatter:off
 	HIGHESTCARD("Carte la plus haute "),
 	PAIR("Paire de "),
-	TWO_PAIR("Paire de "),
+	TWO_PAIR("Double Paire de "),
 	THREE_OF_A_KIND("Triple de "),
 	STRAIGHT("Suite au "),
 	COLOR("couleur avec "),

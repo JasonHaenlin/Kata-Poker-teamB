@@ -17,4 +17,4 @@ Kata-Poker-teamB.iml
 target/
 .project
 .classpath
-
+sonarqube/

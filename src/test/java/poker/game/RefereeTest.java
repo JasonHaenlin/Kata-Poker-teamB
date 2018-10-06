@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class RefereeTest {
 
-    Hand hand1, hand2, hand3, hand4, hand5;
+    Hand hand1, hand2, hand3, hand4, hand5, hand6;
     Referee referee;
 
     @Before
@@ -23,36 +22,113 @@ public class RefereeTest {
         hand3 = new Hand(1);
         hand4 = new Hand(1);
         hand5 = new Hand(1);
+        hand6 = new Hand(1);
     }
 
     @Test
-    public void winnerTest() {
+    public void winnerAdvancedCombinationStrenghtTest() {
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "4Pi", "4Ca", "9Ca", "9Co")));
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "ACo", "APi", "RCo", "VTr")));
 
-        hand1.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Pi", "4Pi", "9Ca", "10Co")));
-        hand2.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "8Co", "2Pi", "VCo", "DTr")));
-        //La main 1 doit gagner avec une paire
         assertEquals(1, referee.establishTheWinner(hand1, hand2));
 
-        assertEquals(2, referee.establishTheWinner(hand2, hand1));
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("3Tr", "4Pi", "5Ca", "6Ca", "7Co")));
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("10Tr", "VCo", "DPi", "RCo", "ATr")));
 
-        hand3.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "8Co", "2Pi", "APi", "DTr")));
-        //Les deux mains ont une paire
-        assertEquals(2, referee.establishTheWinner(hand1, hand3));
+        assertEquals(2, referee.establishTheWinner(hand3, hand4));
 
-        // Ne fonctionne plus avec la gestion des doublons
-        // assertEquals(0, referee.establishTheWinner(hand1, hand1));
-        // assertEquals(0, referee.establishTheWinner(hand2, hand2));
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "2Pi", "3Ca", "4Co", "5Co")));
+        hand6.buildNewHand(new ArrayList<>(Arrays.asList("5Tr", "6Co", "7Pi", "8Co", "9Tr")));
 
-        hand4.buildNewHand(new ArrayList<>(Arrays.asList("7Ca", "4Ca", "7Co", "9Co", "7Pi")));
-        //La main 4 gagne avec un brelan face à rien
-        assertEquals(1, referee.establishTheWinner(hand4, hand2));
-        assertEquals(2, referee.establishTheWinner(hand2, hand4));
-        //La main 4 gagne sur une paire
-        assertEquals(1, referee.establishTheWinner(hand4, hand1));
-        assertEquals(2, referee.establishTheWinner(hand1, hand4));
-
-        // Ne fonctionne plus avec la gestion des doublons
-        // assertEquals(0, referee.establishTheWinner(hand4, hand4));
+        assertEquals(2, referee.establishTheWinner(hand5, hand6));
     }
 
+    @Test
+    public void winnerColorCombinationTest() {
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Tr", "7Tr", "9Tr", "10Tr")));
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "VTr", "RTr", "3Tr", "DTr")));
+
+        assertEquals(2, referee.establishTheWinner(hand1, hand2));
+
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("4Ca", "5Ca", "10Ca", "9Ca", "ACa")));
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "6Co", "VPi", "VCo", "VTr")));
+
+        assertEquals(1, referee.establishTheWinner(hand3, hand4));
+
+    }
+
+    @Test
+    public void winnerMulipleCardResultValueTest() {
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Pi", "6Pi", "9Ca", "10Co")));
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("3Tr", "5Co", "6Ca", "9Co", "10Tr")));
+
+        assertEquals(1, referee.establishTheWinner(hand1, hand2));
+
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "4Pi", "4Ca", "9Ca", "10Co")));
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "6Co", "VPi", "VCo", "VTr")));
+
+        assertEquals(2, referee.establishTheWinner(hand3, hand4));
+    }
+
+    @Test
+    public void winnerSameCombinationTest() {
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "4Pi", "6Pi", "9Ca", "10Co")));
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "ACo", "2Pi", "VCo", "DTr")));
+
+        assertEquals(2, referee.establishTheWinner(hand1, hand2));
+
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "4Pi", "4Ca", "9Ca", "10Co")));
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "6Co", "VPi", "VCo", "VTr")));
+
+        assertEquals(2, referee.establishTheWinner(hand3, hand4));
+
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "4Pi", "9Ca", "9Co", "10Co")));
+        hand6.buildNewHand(new ArrayList<>(Arrays.asList("4Ca", "4Co", "10Pi", "10Tr", "VTr")));
+
+        assertEquals(2, referee.establishTheWinner(hand5, hand6));
+    }
+
+    @Test
+    public void winnerHighestCardtest() {
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Pi", "6Pi", "9Ca", "10Co")));
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "8Co", "2Pi", "VCo", "DTr")));
+
+        assertEquals(2, referee.establishTheWinner(hand1, hand2));
+
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Pi", "6Pi", "9Ca", "10Co")));
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("3Tr", "5Co", "6Ca", "9Co", "VTr")));
+
+        assertEquals(2, referee.establishTheWinner(hand3, hand4));
+    }
+
+    @Test
+    public void winnerBasicCombinationTest() {
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Pi", "4Pi", "9Ca", "10Co")));
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "8Co", "2Pi", "VCo", "DTr")));
+
+        assertEquals(1, referee.establishTheWinner(hand1, hand2));
+
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("3Tr", "5Co", "6Ca", "9Co", "VTr")));
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Pi", "4Pi", "9Ca", "10Co")));
+
+        assertEquals(2, referee.establishTheWinner(hand3, hand4));
+    }
+
+    @Test
+    public void winnerEqualityCombinationTest() {
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "4Co", "4Pi", "9Ca", "9Co")));
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("RTr", "RCo", "RPi", "VCo", "VTr")));
+
+        assertEquals(2, referee.establishTheWinner(hand1, hand2));
+
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "4Co", "6Pi", "6Ca", "9Co")));
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("4Ca", "4Pi", "5Pi", "5Co", "VTr")));
+
+        assertEquals(1, referee.establishTheWinner(hand3, hand4));
+
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("6Tr", "6Pi", "9Ca", "9Co", "ACo")));
+        hand6.buildNewHand(new ArrayList<>(Arrays.asList("6Ca", "6Co", "9Pi", "9Tr", "VTr")));
+
+        assertEquals(1, referee.establishTheWinner(hand5, hand6));
+    }
 }

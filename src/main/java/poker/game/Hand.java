@@ -9,11 +9,13 @@ class Hand {
     private CombinationType type;
     private final int maxNumberOfCards = 5;
     private List<Card> hand;
+    private List<Card> clone;
     private int handNumber;
 
-    private CardValue patternValue = null;
-    private CardValue patternValueExtra = null;
+    private CardValue patternValue = CardValue.C_2;
+    private CardValue patternValueExtra = CardValue.C_2;
     private CardColor patternColor = null;
+    private boolean advancePatternEnabled = true;
 
     Hand(int handNumber) {
         this.handNumber = handNumber;
@@ -37,6 +39,11 @@ class Hand {
             hand.add(nCard);
         }
         hand.sort((Card c1, Card c2) -> Integer.compare(c1.getIntValue(), c2.getIntValue()));
+        saveBackup();
+    }
+
+    private void saveBackup() {
+        this.clone = hand.stream().collect(Collectors.toList());
     }
 
     private CardColor extractColor(String card) {
@@ -78,6 +85,10 @@ class Hand {
      * @return the highest combition found
      */
     CombinationType checkHandType() {
+        if (!advancePatternEnabled) {
+            popAndUpdateHighestCard();
+            return CombinationType.HIGHESTCARD;
+        }
         if (isFourOfAKindDetected()) {
             return CombinationType.FOUR_OF_A_KIND;
         } else if (isFullDetected()) {
@@ -93,6 +104,7 @@ class Hand {
         } else if (isPairDetected()) {
             return CombinationType.PAIR;
         } else {
+            popAndUpdateHighestCard();
             return CombinationType.HIGHESTCARD;
         }
     }
@@ -171,25 +183,17 @@ class Hand {
      * @return True if hand type is double pair false else
      */
     boolean isDoublePairDetected() {
-        // check the presence of a first pair
         if (!isPairDetected()) {
             return false;
         }
-        // save the value into extra 
         setPatternExtraCard(new Card(getPatternValue(), getPatternColor()));
-        // keep a backup
         List<Card> clone = hand;
-        // remove the first pair
         hand = hand.stream().filter(c -> c.getValue() != getPatternValue()).collect(Collectors.toList());
-        //check for a second pair
         boolean ok = isPairDetected();
-        // put back the hand at his original state
         hand = clone;
-        // check if the second pair is not the same as the first one
         if (ok && getPatternValue() != getPatternValueExtra()) {
             return true;
         }
-        // else no pair
         return false;
     }
 
@@ -224,8 +228,7 @@ class Hand {
      * @return true if the hand is straight false else.
      */
     boolean isStraight() {
-        int longueur = hand.size();
-        Card max = hand.get(longueur - 1);
+        Card max = hand.get(hand.size() - 1);
         int i = 0;
         while (hand.get(i + 1).getIntValue() - hand.get(i).getIntValue() == 1) {
 
@@ -307,7 +310,25 @@ class Hand {
     }
 
     private void setPatternExtraCard(Card extraCard) {
-        this.patternValueExtra = extraCard.getValue();
+        if (extraCard == null) {
+            this.patternValueExtra = CardValue.C_2;
+        } else {
+            this.patternValueExtra = extraCard.getValue();
+        }
+    }
+
+    public void popAndUpdateHighestCard() {
+        setPatternResult(clone.remove(clone.size() - 1));
+        setPatternExtraCard(null);
+        type = CombinationType.HIGHESTCARD;
+    }
+
+    public void removeAdvancedPatterns() {
+        this.advancePatternEnabled = false;
+    }
+
+    public boolean isEmpty() {
+        return this.clone.isEmpty();
     }
 
 }

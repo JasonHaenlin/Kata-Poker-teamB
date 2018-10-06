@@ -1,14 +1,13 @@
 package poker.game;
 
-import java.util.List;
-
 /**
  * This class judge who is the winner
  */
 class Referee {
 
-	private int winnerNumber;
 	private String winnerMsg;
+	private CombinationType c1, c2;
+	private Hand hand1, hand2;
 
 	Referee() {
 		this.winnerMsg = "";
@@ -30,102 +29,76 @@ class Referee {
 	 * @param hand2
 	 */
 	int establishTheWinner(Hand hand1, Hand hand2) {
-		checkForDuplicateCards(hand1, hand2);
-		CombinationType c1, c2;
+		this.hand1 = hand1;
+		this.hand2 = hand2;
+		checkForDuplicateCards();
+		return resultOfTheReferee();
+	}
+
+	private int resultOfTheReferee() {
 		c1 = hand1.getHandPattern();
 		c2 = hand2.getHandPattern();
-		List<Card> cardsInHand1 = hand1.getHand();
-		List<Card> cardsInHand2 = hand2.getHand();
+		if (isThereAWinner()) {
+			return setTheResult(true);
+		}
+		if (isPotentialWinnerExist()) {
+			return resultOfTheReferee();
+		}
+		return setTheResult(false);
+	}
 
-		if (c1.ordinal() < c2.ordinal()) {
-			winnerMsg = "La main 2 gagne avec : " + c2.toString();
-			return 2;
-		} else if (c2.ordinal() < c1.ordinal()) {
-			winnerMsg = "La main 1 gagne avec : " + c1.toString();
-			return 1;
-		} else {
-			winnerMsg = "Les deux mains sont du meme type";
+	private boolean isPotentialWinnerExist() {
+		switch (hand1.getType()) {
+		case HIGHESTCARD:
+			if (hand1.isEmpty() || hand2.isEmpty())
+				return false;
+			return true;
+		case ROYAL_QUINTE_FLUSH:
+			return false;
+		default:
+			hand1.removeAdvancedPatterns();
+			hand2.removeAdvancedPatterns();
+			return true;
+		}
+	}
 
-			switch (c1) {
-			case HIGHESTCARD:
-				for (int i = cardsInHand1.size() - 1; i >= 0; i--) {
-					if (cardsInHand1.get(i).getIntValue() < cardsInHand2.get(i).getIntValue()) {
-						winnerMsg = "La main 2 gagne avec : " + c2.toString() + cardsInHand2.get(i).getIntValue();
-						return 2;
-					} else if (cardsInHand1.get(i).getIntValue() > cardsInHand2.get(i).getIntValue()) {
-						winnerMsg = "La main 1 gagne avec : " + c1.toString() + cardsInHand1.get(i).getIntValue();
-						return 1;
-					} else {
-						winnerMsg = "Egalité des mains";
-						return 0;
-					}
-				}
-			case PAIR:
-				if (hand1.getPatternValue().getValue() != hand2.getPatternValue().getValue()) {
-					if (hand1.getPatternValue().getValue() < hand2.getPatternValue().getValue()) {
-						winnerMsg = "La main 2 gagne avec : " + c2.toString() + hand2.getPatternValue().getValue();
-						return 2;
-					} else {
-						winnerMsg = "La main 1 gagne avec : " + c1.toString() + hand1.getPatternValue().getValue();
-						return 1;
-					}
-
-				} else {
-					for (int i = cardsInHand1.size() - 1; i >= 0; i--) {
-						if (cardsInHand1.get(i).getIntValue() < cardsInHand2.get(i).getIntValue()) { //TODO ajouter carte la plus haute dans l'affichage
-							winnerMsg = "La main 2 gagne avec : " + c2.toString() + hand2.getPatternValue().getValue();
-							return 2;
-						} else if (cardsInHand1.get(i).getIntValue() > cardsInHand2.get(i).getIntValue()) { //TODO ajouter carte la plus haute dans l'affichage
-							winnerMsg = "La main 1 gagne avec : " + c1.toString() + hand1.getPatternValue().getValue();
-							return 1;
-						} else {
-							winnerMsg = "Egalité des mains";
-							return 0;
-						}
-					}
-				}
-			default: // for Three of a kind, straight, full and four of a kind
-				if (hand1.getPatternValue().getValue() < hand2.getPatternValue().getValue()) {
-					winnerMsg = "La main 2 gagne avec : " + c2.toString() + hand2.getPatternValue().getValue();
-					return 2;
-				} else if (hand1.getPatternValue().getValue() > hand2.getPatternValue().getValue()) {
-					winnerMsg = "La main 1 gagne avec : " + c1.toString() + hand1.getPatternValue().getValue();
+	private int setTheResult(boolean verdict) {
+		if (verdict) {
+			if (c1.getStrength() == c2.getStrength()) {
+				if (computeScore(hand1) > computeScore(hand2)) {
+					setWinnerMsg(1, c1, hand1.getPatternValue().getValue());
 					return 1;
 				} else {
-					winnerMsg = "Egalité des mains";
-					return 0;
+					setWinnerMsg(2, c2, hand2.getPatternValue().getValue());
+					return 2;
 				}
+			} else if (c1.getStrength() > c2.getStrength()) {
+				setWinnerMsg(1, c1, hand1.getPatternValue().getValue());
+				return 1;
+			} else {
+				setWinnerMsg(2, c2, hand2.getPatternValue().getValue());
+				return 2;
 			}
 		}
+		setWinnerMsg();
+		return 0;
 	}
 
-	/**
-	 * compare hands of different combination type, changes the according winner message
-	 * and returns his number.
-	 *
-	 * @param hand1
-	 * @param hand2
-	 * @return an int equal to the winner's number or 0 in case of draw.
-	 */
-	int compareDifferentTypeHands(Hand hand1, Hand hand2){
-		if (hand1.getType().ordinal() > hand2.getType().ordinal()) {
-			return 1;
-		} else if (hand1.getType().ordinal() < hand2.getType().ordinal()) {
-			return 2;
-		} else {
-			return 0;
+	private int computeScore(Hand hand) {
+		return hand.getPatternValue().getValue() * 10 + hand.getPatternValueExtra().getValue();
+	}
+
+	private boolean isThereAWinner() {
+		if (c1.getStrength() != c2.getStrength()) {
+			return true;
 		}
-	}
-
-	/**
-	 * compare the combination types in the CombinationType enum using its index.
-	 *
-	 * @param TypeOrdinal1
-	 * @param TypeOrdinal2
-	 * @return true if same CombinationType, false otherwise .
-	 */
-	boolean isSameCombinationType (int TypeOrdinal1, int TypeOrdinal2) {
-		return TypeOrdinal1 == TypeOrdinal2;
+		if (this.hand1.getPatternValue() == this.hand2.getPatternValue()) {
+			if (this.hand1.getPatternValueExtra() == this.hand2.getPatternValueExtra()) {
+				return false;
+			}
+			return true;
+		}
+		return true;
 	}
 
 	/**
@@ -135,15 +108,15 @@ class Referee {
 	 * @param winningCombination
 	 * @param winningPatternValue
 	 */
-	void setWinnerMsg(int winner, CombinationType winningCombination, int winningPatternValue) {
-		if (winner != 0) {
-			winnerMsg = "La main " + winner + " gagne avec : " + winningCombination.toString() + winningPatternValue;
-		} else {
-			winnerMsg = "Egalité des mains";
-		}
+	private void setWinnerMsg(int winner, CombinationType winningCombination, int winningPatternValue) {
+		winnerMsg = "La main " + winner + " gagne avec : " + winningCombination.toString() + winningPatternValue;
 	}
 
-	public void checkForDuplicateCards(Hand hand1, Hand hand2) {
+	private void setWinnerMsg() {
+		winnerMsg = "Egalité des mains";
+	}
+
+	public void checkForDuplicateCards() {
 		for (Card card1 : hand1.getHand()) {
 			if (hand2.getHand().contains(card1))
 				throw new RuntimeException("Les doublons ne sont pas autorise entre deux mains " + card1.toString());

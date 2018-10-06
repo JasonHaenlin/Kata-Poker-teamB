@@ -7,6 +7,7 @@ import java.util.List;
  */
 class Referee {
 
+	private int winnerNumber;
 	private String winnerMsg;
 
 	Referee() {
@@ -95,6 +96,50 @@ class Referee {
 					return 0;
 				}
 			}
+		}
+	}
+
+	/**
+	 * compare hands of different combination type, changes the according winner message
+	 * and returns his number.
+	 *
+	 * @param hand1
+	 * @param hand2
+	 * @return an int equal to the winner's number or 0 in case of draw.
+	 */
+	int compareDifferentTypeHands(Hand hand1, Hand hand2){
+		if (hand1.getType().ordinal() > hand2.getType().ordinal()) {
+			return 1;
+		} else if (hand1.getType().ordinal() < hand2.getType().ordinal()) {
+			return 2;
+		} else {
+			return 0;
+		}
+	}
+
+	/**
+	 * compare the combination types in the CombinationType enum using its index.
+	 *
+	 * @param TypeOrdinal1
+	 * @param TypeOrdinal2
+	 * @return true if same CombinationType, false otherwise .
+	 */
+	boolean isSameCombinationType (int TypeOrdinal1, int TypeOrdinal2) {
+		return TypeOrdinal1 == TypeOrdinal2;
+	}
+
+	/**
+	 * sets the winner message that will be displayed
+	 *
+	 * @param winner
+	 * @param winningCombination
+	 * @param winningPatternValue
+	 */
+	void setWinnerMsg(int winner, CombinationType winningCombination, int winningPatternValue) {
+		if (winner != 0) {
+			winnerMsg = "La main " + winner + " gagne avec : " + winningCombination.toString() + winningPatternValue;
+		} else {
+			winnerMsg = "Egalité des mains";
 		}
 	}
 

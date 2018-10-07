@@ -1,6 +1,9 @@
 package poker.game;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import poker.game.exception.CardDuplicationBetweenPlayerRuntimeException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +26,19 @@ public class RefereeTest {
         hand4 = new Hand(4);
         hand5 = new Hand(5);
         hand6 = new Hand(6);
+    }
+
+    @Test
+    public void duplicatedCardsBetweenHands(){
+        // cards are unique... don't copy the other hand
+        try {
+            this.hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Co","3Ca","7Pi","4Co","9Tr")));
+            this.hand2.buildNewHand(new ArrayList<>(Arrays.asList("10Tr", "VTr", "DTr", "RTr", "9Tr")));
+
+            referee.checkForDuplicateCards(hand1, hand2);
+            fail("This test should have failed");
+        } catch (CardDuplicationBetweenPlayerRuntimeException e) {
+        }
     }
 
     @Test

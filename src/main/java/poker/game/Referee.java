@@ -34,7 +34,7 @@ class Referee {
 	int establishTheWinner(Hand hand1, Hand hand2) {
 		this.hand1 = hand1;
 		this.hand2 = hand2;
-		checkForDuplicateCards();
+		checkForDuplicateCards(hand1, hand2);
 		return resultOfTheReferee();
 	}
 
@@ -109,7 +109,7 @@ class Referee {
 		winnerMsg = "Egalité des mains";
 	}
 
-	public void checkForDuplicateCards() {
+	public void checkForDuplicateCards(Hand hand1, Hand hand2) {
 		for (Card card1 : hand1.getHand()) {
 			if (hand2.getHand().contains(card1))
 				throw new CardDuplicationBetweenPlayerRuntimeException(card1.toString());

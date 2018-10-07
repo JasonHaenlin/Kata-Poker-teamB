@@ -61,10 +61,9 @@ class Referee {
 	}
 
 	private boolean isPotentialWinnerExist() {
-		switch (hand1.getType()) {
-		case HIGHESTCARD:
+		if (hand1.getType() == CombinationType.HIGHESTCARD) {
 			return !(hand1.isEmpty() || hand2.isEmpty());
-		default:
+		} else {
 			hand1.removeAdvancedPatterns();
 			hand2.removeAdvancedPatterns();
 			return true;

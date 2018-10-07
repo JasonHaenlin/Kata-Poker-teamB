@@ -26,11 +26,22 @@ public class RefereeTest {
     }
 
     @Test
-    public void winnerQuinteFlushTest() {
+    public void winnerStraightFlushTest() {
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Tr", "6Tr", "7Tr", "8Tr")));
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("9Tr", "10Tr", "VTr", "DTr", "RTr")));
 
         assertEquals(2, referee.establishTheWinner(hand1, hand2));
+
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("ACo", "2Co", "3Co", "4Co", "5Co")));
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("APi", "2Pi", "3Pi", "4Pi", "5Pi")));
+
+        assertEquals(0, referee.establishTheWinner(hand3, hand4));
+
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("6Pi", "2Pi", "3Pi", "4Pi", "5Pi")));
+        hand6.buildNewHand(new ArrayList<>(Arrays.asList("ACo", "2Co", "3Co", "4Co", "5Co")));
+
+        assertEquals(5, referee.establishTheWinner(hand5, hand6));
+
     }
 
     @Test
@@ -120,6 +131,12 @@ public class RefereeTest {
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Pi", "4Pi", "9Ca", "10Co")));
 
         assertEquals(4, referee.establishTheWinner(hand3, hand4));
+
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("6Co", "2Co", "3Co", "4Co", "5Co")));
+        hand6.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "ACo", "ACa", "9Co", "APi")));
+
+        assertEquals(5, referee.establishTheWinner(hand5,hand6));
+
     }
 
     @Test

@@ -3,15 +3,15 @@ package poker.game;
 enum CombinationType {
 	// @formatter:off
 	HIGHESTCARD(1,"Carte la plus haute "),
-	PAIR(2,"Paire de "),
-	TWO_PAIR(3,"Double Paire de "),
-	THREE_OF_A_KIND(4,"Triple de "),
-	STRAIGHT(5,"Suite au "),
-	COLOR(6,"couleur avec "),
-	FULL(7,"Full "),
-	FOUR_OF_A_KIND(8,"Carre de "),
-	QUINTE_FLUSH(9,"Quinte flush de "),
-	ROYAL_QUINTE_FLUSH(10,"Quinte flush Royal ");
+	PAIR(10,"Paire de "),
+	TWO_PAIR(100,"Double Paire de "),
+	THREE_OF_A_KIND(1000,"Triple de "),
+	STRAIGHT(10000,"Suite au "),
+	COLOR(11000,"couleur avec "),
+	FULL(12000,"Full "),
+	FOUR_OF_A_KIND(13000,"Carre de "),
+	QUINTE_FLUSH(200000,"Quinte flush de "),
+	ROYAL_QUINTE_FLUSH(210000,"Quinte flush Royal ");
 	// @formatter:on
 
 	private String typeOfHand = "";

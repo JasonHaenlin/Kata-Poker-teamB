@@ -19,12 +19,12 @@ public class HandTest {
         hand = new Hand(1);
 
         hand1 = new Hand(1);
-        hand2 = new Hand(1);
-        hand3 = new Hand(1);
-        hand4 = new Hand(1);
-        hand5 = new Hand(1);
-        hand6 = new Hand(1);
-        hand7 = new Hand(1);
+        hand2 = new Hand(2);
+        hand3 = new Hand(3);
+        hand4 = new Hand(4);
+        hand5 = new Hand(5);
+        hand6 = new Hand(6);
+        hand7 = new Hand(7);
 
     }
 

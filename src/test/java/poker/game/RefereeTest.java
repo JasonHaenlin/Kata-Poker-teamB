@@ -18,11 +18,11 @@ public class RefereeTest {
         referee = new Referee();
 
         hand1 = new Hand(1);
-        hand2 = new Hand(1);
-        hand3 = new Hand(1);
-        hand4 = new Hand(1);
-        hand5 = new Hand(1);
-        hand6 = new Hand(1);
+        hand2 = new Hand(2);
+        hand3 = new Hand(3);
+        hand4 = new Hand(4);
+        hand5 = new Hand(5);
+        hand6 = new Hand(6);
     }
 
     @Test
@@ -43,12 +43,12 @@ public class RefereeTest {
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("3Tr", "4Pi", "5Ca", "6Ca", "7Co")));
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("10Tr", "VCo", "DPi", "RCo", "ATr")));
 
-        assertEquals(2, referee.establishTheWinner(hand3, hand4));
+        assertEquals(4, referee.establishTheWinner(hand3, hand4));
 
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "2Pi", "3Ca", "4Co", "5Co")));
         hand6.buildNewHand(new ArrayList<>(Arrays.asList("5Tr", "6Co", "7Pi", "8Co", "9Tr")));
 
-        assertEquals(2, referee.establishTheWinner(hand5, hand6));
+        assertEquals(6, referee.establishTheWinner(hand5, hand6));
     }
 
     @Test
@@ -61,7 +61,7 @@ public class RefereeTest {
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("4Ca", "5Ca", "10Ca", "9Ca", "ACa")));
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "6Co", "VPi", "VCo", "VTr")));
 
-        assertEquals(1, referee.establishTheWinner(hand3, hand4));
+        assertEquals(3, referee.establishTheWinner(hand3, hand4));
 
     }
 
@@ -75,7 +75,7 @@ public class RefereeTest {
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "4Pi", "4Ca", "9Ca", "10Co")));
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "6Co", "VPi", "VCo", "VTr")));
 
-        assertEquals(2, referee.establishTheWinner(hand3, hand4));
+        assertEquals(4, referee.establishTheWinner(hand3, hand4));
     }
 
     @Test
@@ -88,12 +88,12 @@ public class RefereeTest {
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "4Pi", "4Ca", "9Ca", "10Co")));
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "6Co", "VPi", "VCo", "VTr")));
 
-        assertEquals(2, referee.establishTheWinner(hand3, hand4));
+        assertEquals(4, referee.establishTheWinner(hand3, hand4));
 
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "4Pi", "9Ca", "9Co", "10Co")));
         hand6.buildNewHand(new ArrayList<>(Arrays.asList("4Ca", "4Co", "10Pi", "10Tr", "VTr")));
 
-        assertEquals(2, referee.establishTheWinner(hand5, hand6));
+        assertEquals(6, referee.establishTheWinner(hand5, hand6));
     }
 
     @Test
@@ -106,7 +106,7 @@ public class RefereeTest {
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Pi", "6Pi", "9Ca", "10Co")));
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("3Tr", "5Co", "6Ca", "9Co", "VTr")));
 
-        assertEquals(2, referee.establishTheWinner(hand3, hand4));
+        assertEquals(4, referee.establishTheWinner(hand3, hand4));
     }
 
     @Test
@@ -119,7 +119,7 @@ public class RefereeTest {
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("3Tr", "5Co", "6Ca", "9Co", "VTr")));
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Pi", "4Pi", "9Ca", "10Co")));
 
-        assertEquals(2, referee.establishTheWinner(hand3, hand4));
+        assertEquals(4, referee.establishTheWinner(hand3, hand4));
     }
 
     @Test
@@ -132,12 +132,12 @@ public class RefereeTest {
         hand3.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "4Co", "6Pi", "6Ca", "9Co")));
         hand4.buildNewHand(new ArrayList<>(Arrays.asList("4Ca", "4Pi", "5Pi", "5Co", "VTr")));
 
-        assertEquals(1, referee.establishTheWinner(hand3, hand4));
+        assertEquals(3, referee.establishTheWinner(hand3, hand4));
 
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("6Tr", "6Pi", "9Ca", "9Co", "ACo")));
         hand6.buildNewHand(new ArrayList<>(Arrays.asList("6Ca", "6Co", "9Pi", "9Tr", "VTr")));
 
-        assertEquals(1, referee.establishTheWinner(hand5, hand6));
+        assertEquals(5, referee.establishTheWinner(hand5, hand6));
     }
 
     @Test

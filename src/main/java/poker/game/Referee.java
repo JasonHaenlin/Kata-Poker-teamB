@@ -8,8 +8,7 @@ import poker.game.exception.CardDuplicationBetweenPlayerRuntimeException;
 class Referee {
 
 	private String winnerMsg;
-	private CombinationType c1, c2;
-	private Hand hand1, hand2;
+	private Hand hand1, hand2, winnerHand;
 
 	Referee() {
 		this.winnerMsg = "";
@@ -37,9 +36,17 @@ class Referee {
 		return resultOfTheReferee();
 	}
 
+	private int computeScoreAd(Hand hand) {
+		int pattern = hand.getType().getStrength();
+		int value = hand.getPatternValue().getValue();
+		int extra = 0;
+		if (hand.getPatternValueExtra() != null)
+			extra = hand.getPatternValueExtra().getValue();
+		return (pattern * value) + (pattern / 10 * extra);
+
+	}
+
 	private int resultOfTheReferee() {
-		c1 = hand1.getHandPattern();
-		c2 = hand2.getHandPattern();
 		if (isThereAWinner()) {
 			return setTheResult(true);
 		}
@@ -66,40 +73,25 @@ class Referee {
 
 	private int setTheResult(boolean verdict) {
 		if (verdict) {
-			if (c1.getStrength() == c2.getStrength()) {
-				if (computeScore(hand1) > computeScore(hand2)) {
-					setWinnerMsg(1, c1, hand1.getPatternValue().getValue());
-					return 1;
-				} else {
-					setWinnerMsg(2, c2, hand2.getPatternValue().getValue());
-					return 2;
-				}
-			} else if (c1.getStrength() > c2.getStrength()) {
-				setWinnerMsg(1, c1, hand1.getPatternValue().getValue());
-				return 1;
-			} else {
-				setWinnerMsg(2, c2, hand2.getPatternValue().getValue());
-				return 2;
-			}
+			int player = winnerHand.getHandNumber();
+			CombinationType comb = winnerHand.getType();
+			int combType = winnerHand.getPatternValue().getValue();
+			setWinnerMsg(player, comb, combType);
+			return player;
 		}
 		setWinnerMsg();
 		return 0;
 	}
 
-	private int computeScore(Hand hand) {
-		return hand.getPatternValue().getValue() * 10 + hand.getPatternValueExtra().getValue();
-	}
-
 	private boolean isThereAWinner() {
-		if (c1.getStrength() != c2.getStrength()) {
-			return true;
-		}
-		if (this.hand1.getPatternValue() == this.hand2.getPatternValue()) {
-			if (this.hand1.getPatternValueExtra() == this.hand2.getPatternValueExtra()) {
-				return false;
-			}
-			return true;
-		}
+		int h1 = computeScoreAd(hand1);
+		int h2 = computeScoreAd(hand2);
+		if (h1 == h2)
+			return false;
+		if (h1 > h2)
+			winnerHand = hand1;
+		else
+			winnerHand = hand2;
 		return true;
 	}
 

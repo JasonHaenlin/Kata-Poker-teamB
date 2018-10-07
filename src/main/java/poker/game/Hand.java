@@ -16,7 +16,7 @@ class Hand {
     private int handNumber;
 
     private CardValue patternValue = CardValue.C_2;
-    private CardValue patternValueExtra = CardValue.C_2;
+    private CardValue patternValueExtra = null;
     private CardColor patternColor = null;
     private boolean advancePatternEnabled = true;
 
@@ -50,6 +50,7 @@ class Hand {
      * @return the highest combition found
      */
     CombinationType checkHandType() {
+        patternValueExtra = null;
         if (!advancePatternEnabled) {
             popAndUpdateHighestCard();
             return CombinationType.HIGHESTCARD;
@@ -247,7 +248,7 @@ class Hand {
 
     private void setPatternExtraCard(Card extraCard) {
         if (extraCard == null) {
-            this.patternValueExtra = CardValue.C_2;
+            this.patternValueExtra = null;
         } else {
             this.patternValueExtra = extraCard.getValue();
         }

@@ -1,5 +1,7 @@
 package poker.game;
 
+import poker.game.exception.CardColorRuntimeException;
+
 enum CardColor {
     // @formatter:off   
     HEART("Coeur"),
@@ -30,7 +32,7 @@ enum CardColor {
         case "Pi":
             return CardColor.SPADE;
         default:
-            throw new RuntimeException("Couleur non reconnue");
+            throw new CardColorRuntimeException(strToEnum);
         }
     }
 }

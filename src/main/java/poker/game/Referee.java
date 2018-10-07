@@ -1,5 +1,7 @@
 package poker.game;
 
+import poker.game.exception.CardDuplicationBetweenPlayerRuntimeException;
+
 /**
  * This class judge who is the winner
  */
@@ -119,7 +121,7 @@ class Referee {
 	public void checkForDuplicateCards() {
 		for (Card card1 : hand1.getHand()) {
 			if (hand2.getHand().contains(card1))
-				throw new RuntimeException("Les doublons ne sont pas autorise entre deux mains " + card1.toString());
+				throw new CardDuplicationBetweenPlayerRuntimeException(card1.toString());
 		}
 	}
 

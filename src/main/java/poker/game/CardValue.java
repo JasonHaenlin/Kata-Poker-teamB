@@ -1,5 +1,7 @@
 package poker.game;
 
+import poker.game.exception.CardValueRuntimeException;
+
 enum CardValue {
     // @formatter:off   
     C_2("2",2),
@@ -36,6 +38,10 @@ enum CardValue {
     }
 
     public static CardValue getEnum(String strToEnum) {
-        return CardValue.valueOf("C_" + strToEnum.toUpperCase());
+        try {
+            return CardValue.valueOf("C_" + strToEnum.toUpperCase());
+        } catch (Exception e) {
+            throw new CardValueRuntimeException(strToEnum);
+        }
     }
 }

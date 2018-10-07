@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import poker.game.exception.CardDuplicationInHandRuntimeException;
+import poker.game.exception.CardWrongInputSizeRuntimeException;
+import poker.game.exception.WrongHandSizeRuntimeException;
+
 class Hand {
 
     private CombinationType type;
     private final int maxNumberOfCards = 5;
     private List<Card> hand;
-    private List<Card> clone;
     private int handNumber;
 
     private CardValue patternValue = CardValue.C_2;
@@ -29,21 +32,16 @@ class Hand {
      */
     void buildNewHand(List<String> listCard) {
         if (!check(listCard)) {
-            throw new RuntimeException("Erreur de saisie de la main: taille d'une main = 5 cartes");
+            throw new WrongHandSizeRuntimeException();
         }
         hand = new ArrayList<>();
         for (String card : listCard) {
             Card nCard = new Card(extractValue(card), extractColor(card));
             if (hand.contains(nCard))
-                throw new RuntimeException("Les doublons ne sont pas autorise dans la main " + nCard.toString());
+                throw new CardDuplicationInHandRuntimeException(card.toString());
             hand.add(nCard);
         }
         hand.sort((Card c1, Card c2) -> Integer.compare(c1.getIntValue(), c2.getIntValue()));
-        saveBackup();
-    }
-
-    private void saveBackup() {
-        this.clone = hand.stream().collect(Collectors.toList());
     }
 
     private CardColor extractColor(String card) {
@@ -58,7 +56,7 @@ class Hand {
 
     private void checkSize(String card) {
         if (card.length() < 3)
-            throw new RuntimeException("mauvaise saisie de la main");
+            throw new CardWrongInputSizeRuntimeException();
     }
 
     /**
@@ -104,6 +102,7 @@ class Hand {
         } else if (isPairDetected()) {
             return CombinationType.PAIR;
         } else {
+            removeAdvancedPatterns();
             popAndUpdateHighestCard();
             return CombinationType.HIGHESTCARD;
         }
@@ -268,6 +267,20 @@ class Hand {
         return true;
     }
 
+    void popAndUpdateHighestCard() {
+        setPatternResult(hand.remove(hand.size() - 1));
+        setPatternExtraCard(null);
+        type = CombinationType.HIGHESTCARD;
+    }
+
+    void removeAdvancedPatterns() {
+        this.advancePatternEnabled = false;
+    }
+
+    boolean isEmpty() {
+        return this.hand.isEmpty();
+    }
+
     /**
      * @return the type
      */
@@ -315,20 +328,6 @@ class Hand {
         } else {
             this.patternValueExtra = extraCard.getValue();
         }
-    }
-
-    public void popAndUpdateHighestCard() {
-        setPatternResult(clone.remove(clone.size() - 1));
-        setPatternExtraCard(null);
-        type = CombinationType.HIGHESTCARD;
-    }
-
-    public void removeAdvancedPatterns() {
-        this.advancePatternEnabled = false;
-    }
-
-    public boolean isEmpty() {
-        return this.clone.isEmpty();
     }
 
 }

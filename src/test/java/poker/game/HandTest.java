@@ -5,6 +5,8 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import poker.game.exception.CardDuplicationInHandRuntimeException;
+import poker.game.exception.CardWrongInputSizeRuntimeException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,6 +69,28 @@ public class HandTest {
         } catch (Exception e) {
         }
     }
+
+    @Test
+    public void duplicatedCardsInHandTest(){
+        // cards are unique... put your card back in your sleeves
+        try {
+            hand.buildNewHand(new ArrayList<>(Arrays.asList("7Pi","3Ca","7Pi","4Co","9Tr")));
+            fail("This test should have failed");
+        } catch (CardDuplicationInHandRuntimeException e) {
+        }
+    }
+
+    @Test //checks that a Runtime Exception is catched when a card is wrongly entered (less than 3 char)
+    public void wrongInputCardSize(){
+        // cards are unique... put your card back in your sleeves
+        try {
+            hand.buildNewHand(new ArrayList<>(Arrays.asList("7Co","3Ca","7Pi","4Co","9T")));
+            fail("This test should have failed");
+        } catch (CardWrongInputSizeRuntimeException e) {
+        }
+    }
+
+
 
     @Test
     public void testPair() {

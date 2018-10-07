@@ -26,6 +26,14 @@ public class RefereeTest {
     }
 
     @Test
+    public void winnerQuinteFlushTest() {
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Tr", "6Tr", "7Tr", "8Tr")));
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("9Tr", "10Tr", "VTr", "DTr", "RTr")));
+
+        assertEquals(2, referee.establishTheWinner(hand1, hand2));
+    }
+
+    @Test
     public void winnerAdvancedCombinationStrenghtTest() {
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "4Pi", "4Ca", "9Ca", "9Co")));
         hand2.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "ACo", "APi", "RCo", "VTr")));
@@ -130,5 +138,23 @@ public class RefereeTest {
         hand6.buildNewHand(new ArrayList<>(Arrays.asList("6Ca", "6Co", "9Pi", "9Tr", "VTr")));
 
         assertEquals(1, referee.establishTheWinner(hand5, hand6));
+    }
+
+    @Test
+    public void advancedEqualityTest() {
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "RTr", "7Tr", "9Tr", "10Tr")));
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("4Ca", "RCa", "7Ca", "9Ca", "10Ca")));
+
+        assertEquals(0, referee.establishTheWinner(hand1, hand2));
+
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Tr", "6Tr", "7Tr", "8Tr")));
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("4Ca", "5Ca", "6Ca", "7Ca", "8Ca")));
+
+        assertEquals(0, referee.establishTheWinner(hand3, hand4));
+
+        hand5.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "2Pi", "3Ca", "4Co", "5Co")));
+        hand6.buildNewHand(new ArrayList<>(Arrays.asList("ACa", "2Tr", "3Tr", "4Pi", "5Tr")));
+
+        assertEquals(0, referee.establishTheWinner(hand5, hand6));
     }
 }

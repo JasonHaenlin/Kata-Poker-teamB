@@ -44,39 +44,6 @@ class Hand {
         hand.sort((Card c1, Card c2) -> Integer.compare(c1.getIntValue(), c2.getIntValue()));
     }
 
-    private CardColor extractColor(String card) {
-        checkSize(card);
-        return CardColor.getEnum(card.substring(card.length() - 2));
-    }
-
-    private CardValue extractValue(String card) {
-        checkSize(card);
-        return CardValue.getEnum(card.substring(0, card.length() - 2));
-    }
-
-    private void checkSize(String card) {
-        if (card.length() < 3)
-            throw new CardWrongInputSizeRuntimeException();
-    }
-
-    /**
-     * @return the hand
-     */
-    List<Card> getHand() {
-        return hand;
-    }
-
-    /**
-     * @return the handNumber
-     */
-    int getHandNumber() {
-        return handNumber;
-    }
-
-    private boolean check(List<String> listCard) {
-        return listCard.size() == maxNumberOfCards;
-    }
-
     /**
      * Check every cards of a hand to see if a pattern is found.
      *
@@ -273,6 +240,38 @@ class Hand {
         type = CombinationType.HIGHESTCARD;
     }
 
+    private void setPatternResult(Card cardId) {
+        this.patternColor = cardId.getColor();
+        this.patternValue = cardId.getValue();
+    }
+
+    private void setPatternExtraCard(Card extraCard) {
+        if (extraCard == null) {
+            this.patternValueExtra = CardValue.C_2;
+        } else {
+            this.patternValueExtra = extraCard.getValue();
+        }
+    }
+
+    private CardColor extractColor(String card) {
+        checkSize(card);
+        return CardColor.getEnum(card.substring(card.length() - 2));
+    }
+
+    private CardValue extractValue(String card) {
+        checkSize(card);
+        return CardValue.getEnum(card.substring(0, card.length() - 2));
+    }
+
+    private void checkSize(String card) {
+        if (card.length() < 3)
+            throw new CardWrongInputSizeRuntimeException();
+    }
+
+    private boolean check(List<String> listCard) {
+        return listCard.size() == maxNumberOfCards;
+    }
+
     void removeAdvancedPatterns() {
         this.advancePatternEnabled = false;
     }
@@ -317,17 +316,18 @@ class Hand {
         return patternValueExtra;
     }
 
-    private void setPatternResult(Card cardId) {
-        this.patternColor = cardId.getColor();
-        this.patternValue = cardId.getValue();
+    /**
+     * @return the hand
+     */
+    List<Card> getHand() {
+        return hand;
     }
 
-    private void setPatternExtraCard(Card extraCard) {
-        if (extraCard == null) {
-            this.patternValueExtra = CardValue.C_2;
-        } else {
-            this.patternValueExtra = extraCard.getValue();
-        }
+    /**
+     * @return the handNumber
+     */
+    int getHandNumber() {
+        return handNumber;
     }
 
 }

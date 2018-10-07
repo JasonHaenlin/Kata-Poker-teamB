@@ -36,8 +36,6 @@ public class WinnerTest {
 		assertEquals(2, referee.establishTheWinner(hand1, hand2));
 	}
 
-	@Deprecated
-	@Ignore
 	@Test
 	public void equalityHandTest() {
 		hand1.buildNewHand(new ArrayList<>(Arrays.asList("7Tr", "4Co", "ACa", "9Pi", "9Ca")));

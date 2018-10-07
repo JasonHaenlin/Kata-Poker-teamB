@@ -47,6 +47,8 @@ class Referee {
 	}
 
 	private int resultOfTheReferee() {
+		hand1.getHandPattern();
+		hand2.getHandPattern();
 		if (isThereAWinner()) {
 			return setTheResult(true);
 		}

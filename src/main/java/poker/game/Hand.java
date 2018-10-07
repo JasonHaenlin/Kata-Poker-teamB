@@ -231,7 +231,7 @@ class Hand {
             }
             prev = currCard;
         }
-        setPatternResult(prev);
+        if (prev != null) setPatternResult(prev);
         return true;
     }
 

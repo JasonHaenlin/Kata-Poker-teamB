@@ -208,4 +208,24 @@ public class HandTest {
         assertEquals("3 false", false, hand4.isColorDetected());
     }
 
+    @Test
+    public void testQuinteFlush(){
+        //Test with flush
+        hand1.buildNewHand(new ArrayList<>(Arrays.asList("3Ca", "4Ca", "10Ca", "ACa", "RCa")));
+        assertEquals(false, hand1.isQuinteFlushDetected());
+        //Test with straight
+        hand2.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "4Pi", "2Tr", "5Co", "3Ca")));
+        assertEquals(false, hand2.isQuinteFlushDetected());
+        //Test with Quinte flush
+        hand3.buildNewHand(new ArrayList<>(Arrays.asList("3Ca", "4Ca", "5Ca", "6Ca", "7Ca")));
+        assertEquals(true, hand3.isQuinteFlushDetected());
+        assertEquals(CardColor.SQUARE, hand3.getPatternColor());
+        assertEquals(7, hand3.getPatternValue().getValue());
+        //Test with Quinte Flush ROYAL
+        hand4.buildNewHand(new ArrayList<>(Arrays.asList("VCo", "RCo", "ACo", "DCo", "10Co")));
+        assertEquals(true, hand4.isQuinteFlushDetected());
+        assertEquals(CardColor.HEART, hand4.getPatternColor());
+        assertEquals(14, hand4.getPatternValue().getValue());
+    }
+
 }

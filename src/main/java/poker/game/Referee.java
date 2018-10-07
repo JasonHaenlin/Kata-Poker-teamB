@@ -64,8 +64,6 @@ class Referee {
 		switch (hand1.getType()) {
 		case HIGHESTCARD:
 			return !(hand1.isEmpty() || hand2.isEmpty());
-		case ROYAL_QUINTE_FLUSH:
-			return false;
 		default:
 			hand1.removeAdvancedPatterns();
 			hand2.removeAdvancedPatterns();

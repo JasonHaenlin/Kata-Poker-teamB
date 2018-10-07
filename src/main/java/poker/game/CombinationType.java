@@ -10,8 +10,7 @@ enum CombinationType {
 	COLOR(11000,"couleur avec "),
 	FULL(12000,"Full "),
 	FOUR_OF_A_KIND(13000,"Carre de "),
-	QUINTE_FLUSH(200000,"Quinte flush de "),
-	ROYAL_QUINTE_FLUSH(210000,"Quinte flush Royal ");
+	QUINTE_FLUSH(200000,"Quinte flush de ");
 	// @formatter:on
 
 	private String typeOfHand = "";

@@ -56,7 +56,9 @@ class Hand {
             popAndUpdateHighestCard();
             return CombinationType.HIGHESTCARD;
         }
-        if (isFourOfAKindDetected()) {
+        if (isQuinteFlushDetected()){
+            return CombinationType.QUINTE_FLUSH;
+        } else if (isFourOfAKindDetected()) {
             return CombinationType.FOUR_OF_A_KIND;
         } else if (isFullDetected()) {
             return CombinationType.FULL;
@@ -232,6 +234,10 @@ class Hand {
         if (prev != null)
             setPatternResult(prev);
         return true;
+    }
+
+    boolean isQuinteFlushDetected(){
+        return isColorDetected() && isStraight();
     }
 
     void popAndUpdateHighestCard() {

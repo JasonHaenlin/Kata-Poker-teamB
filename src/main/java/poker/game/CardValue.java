@@ -19,22 +19,22 @@ enum CardValue {
     C_A("As",14);
     // @formatter:on 
 
-    private String cardName = "";
-    private int cardValue = 2;
+    private String name = "";
+    private int value = 2;
 
-    CardValue(String cardName, int cardValue) {
-        this.cardName = cardName;
-        this.cardValue = cardValue;
+    CardValue(String name, int value) {
+        this.name = name;
+        this.value = value;
 
     }
 
     public int getValue() {
-        return this.cardValue;
+        return this.value;
     }
 
     @Override
     public String toString() {
-        return this.cardName;
+        return this.name;
     }
 
     public static CardValue getEnum(String strToEnum) {

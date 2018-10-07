@@ -8,7 +8,9 @@ import poker.game.exception.CardDuplicationBetweenPlayerRuntimeException;
 class Referee {
 
 	private String winnerMsg;
-	private Hand hand1, hand2, winnerHand;
+	private Hand hand1;
+	private Hand hand2;
+	private Hand winnerHand;
 
 	Referee() {
 		this.winnerMsg = "";
@@ -61,9 +63,7 @@ class Referee {
 	private boolean isPotentialWinnerExist() {
 		switch (hand1.getType()) {
 		case HIGHESTCARD:
-			if (hand1.isEmpty() || hand2.isEmpty())
-				return false;
-			return true;
+			return !(hand1.isEmpty() || hand2.isEmpty());
 		case ROYAL_QUINTE_FLUSH:
 			return false;
 		default:

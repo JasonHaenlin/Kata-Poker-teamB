@@ -60,11 +60,4 @@ public class Game {
         System.out.println("Joueur " + player + ": veuillez saisir une main");
         return new ArrayList<>(Arrays.asList(sc.nextLine().split(" ")));
     }
-
-    /*
-    public void setEntryManualy() {
-        this.player.get(1).buildNewHand(new ArrayList<>(Arrays.asList("4Tr", "5Pi", "6Pi", "9Ca", "10Co")));
-        this.player.get(0).buildNewHand(new ArrayList<>(Arrays.asList("3Tr", "5Co", "6Ca", "9Co", "10Tr")));
-    }
-    */
 }

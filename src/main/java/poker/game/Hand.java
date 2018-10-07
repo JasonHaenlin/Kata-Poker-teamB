@@ -10,9 +10,10 @@ import poker.game.exception.WrongHandSizeRuntimeException;
 
 class Hand {
 
+    private static final int HAND_SIZE = 5;
+
     private CombinationType type;
-    private final int maxNumberOfCards = 5;
-    private List<Card> hand;
+    private List<Card> cardInHand;
     private int handNumber;
 
     private CardValue patternValue = CardValue.C_2;
@@ -34,14 +35,14 @@ class Hand {
         if (!check(listCard)) {
             throw new WrongHandSizeRuntimeException();
         }
-        hand = new ArrayList<>();
+        cardInHand = new ArrayList<>();
         for (String card : listCard) {
             Card nCard = new Card(extractValue(card), extractColor(card));
-            if (hand.contains(nCard))
-                throw new CardDuplicationInHandRuntimeException(card.toString());
-            hand.add(nCard);
+            if (cardInHand.contains(nCard))
+                throw new CardDuplicationInHandRuntimeException(nCard.toString());
+            cardInHand.add(nCard);
         }
-        hand.sort((Card c1, Card c2) -> Integer.compare(c1.getIntValue(), c2.getIntValue()));
+        cardInHand.sort((Card c1, Card c2) -> Integer.compare(c1.getIntValue(), c2.getIntValue()));
     }
 
     /**
@@ -84,7 +85,7 @@ class Hand {
      */
     boolean isPairDetected() {
         Card prevCard = null;
-        for (Card currCard : hand) {
+        for (Card currCard : cardInHand) {
             if (currCard.equalsValue(prevCard)) {
                 setPatternResult(currCard);
                 return true;
@@ -101,11 +102,11 @@ class Hand {
      * @return true is the hand is Three Of Kind.
      */
     boolean isThreeOfAKindDetected() {
-        Card first = hand.get(0);
-        Card second = hand.get(1);
-        Card third = hand.get(2);
-        Card fourth = hand.get(3);
-        Card fifth = hand.get(4);
+        Card first = cardInHand.get(0);
+        Card second = cardInHand.get(1);
+        Card third = cardInHand.get(2);
+        Card fourth = cardInHand.get(3);
+        Card fifth = cardInHand.get(4);
         if (first.equalsValue(second) && second.equalsValue(third) && !third.equalsValue(fourth)) {
             setPatternResult(first);
             return true;
@@ -127,11 +128,11 @@ class Hand {
      * @return true if hand is FourOfKind.
      */
     boolean isFourOfAKindDetected() {
-        Card first = hand.get(0);
-        Card second = hand.get(1);
-        Card third = hand.get(2);
-        Card fourth = hand.get(3);
-        Card fifth = hand.get(4);
+        Card first = cardInHand.get(0);
+        Card second = cardInHand.get(1);
+        Card third = cardInHand.get(2);
+        Card fourth = cardInHand.get(3);
+        Card fifth = cardInHand.get(4);
         if (first.equalsValue(second) && second.equalsValue(third) && third.equalsValue(fourth) && !fourth.equalsValue(fifth)) {
             setPatternResult(first);
             return true;
@@ -154,14 +155,11 @@ class Hand {
             return false;
         }
         setPatternExtraCard(new Card(getPatternValue(), getPatternColor()));
-        List<Card> clone = hand;
-        hand = hand.stream().filter(c -> c.getValue() != getPatternValue()).collect(Collectors.toList());
+        List<Card> clone = cardInHand;
+        cardInHand = cardInHand.stream().filter(c -> c.getValue() != getPatternValue()).collect(Collectors.toList());
         boolean ok = isPairDetected();
-        hand = clone;
-        if (ok && getPatternValue() != getPatternValueExtra()) {
-            return true;
-        }
-        return false;
+        cardInHand = clone;
+        return (ok && getPatternValue() != getPatternValueExtra());
     }
 
     /**
@@ -177,12 +175,12 @@ class Hand {
         int tok = getPatternValue().getValue();
         if (tok != -1) {
             for (int i = 0; i < 5; i++) {
-                int valCard = hand.get(i).getIntValue();
+                int valCard = cardInHand.get(i).getIntValue();
                 if (valCard != tok) {
                     if (val == 0) {
                         val = valCard;
                     } else if (val == valCard) {
-                        setPatternExtraCard(hand.get(i));
+                        setPatternExtraCard(cardInHand.get(i));
                         return true;
                     }
                 }
@@ -195,21 +193,21 @@ class Hand {
      * @return true if the hand is straight false else.
      */
     boolean isStraight() {
-        Card max = hand.get(hand.size() - 1);
+        Card max = cardInHand.get(cardInHand.size() - 1);
         int i = 0;
-        while (hand.get(i + 1).getIntValue() - hand.get(i).getIntValue() == 1) {
+        while (cardInHand.get(i + 1).getIntValue() - cardInHand.get(i).getIntValue() == 1) {
 
-            if (hand.get(i + 1).getIntValue() - max.getIntValue() == 0) {
+            if (cardInHand.get(i + 1).getIntValue() - max.getIntValue() == 0) {
                 setPatternResult(max);
                 return true;
             }
             i++;
         }
         i = 0;
-        if (max.getIntValue() - hand.get(i).getIntValue() == 12) {
-            while (hand.get(i + 1).getIntValue() - hand.get(i).getIntValue() == 1) {
-                if (hand.get(i + 1).getIntValue() - 5 == 0) {
-                    setPatternResult(hand.get(i + 1));
+        if (max.getIntValue() - cardInHand.get(i).getIntValue() == 12) {
+            while (cardInHand.get(i + 1).getIntValue() - cardInHand.get(i).getIntValue() == 1) {
+                if (cardInHand.get(i + 1).getIntValue() - 5 == 0) {
+                    setPatternResult(cardInHand.get(i + 1));
                     return true;
                 }
                 i++;
@@ -225,18 +223,19 @@ class Hand {
 
     boolean isColorDetected() {
         Card prev = null;
-        for (Card currCard : hand) {
+        for (Card currCard : cardInHand) {
             if (!currCard.equalsColor(prev) && prev != null) {
                 return false;
             }
             prev = currCard;
         }
-        if (prev != null) setPatternResult(prev);
+        if (prev != null)
+            setPatternResult(prev);
         return true;
     }
 
     void popAndUpdateHighestCard() {
-        setPatternResult(hand.remove(hand.size() - 1));
+        setPatternResult(cardInHand.remove(cardInHand.size() - 1));
         setPatternExtraCard(null);
         type = CombinationType.HIGHESTCARD;
     }
@@ -270,7 +269,7 @@ class Hand {
     }
 
     private boolean check(List<String> listCard) {
-        return listCard.size() == maxNumberOfCards;
+        return listCard.size() == HAND_SIZE;
     }
 
     void removeAdvancedPatterns() {
@@ -278,7 +277,7 @@ class Hand {
     }
 
     boolean isEmpty() {
-        return this.hand.isEmpty();
+        return this.cardInHand.isEmpty();
     }
 
     /**
@@ -321,7 +320,7 @@ class Hand {
      * @return the hand
      */
     List<Card> getHand() {
-        return hand;
+        return cardInHand;
     }
 
     /**

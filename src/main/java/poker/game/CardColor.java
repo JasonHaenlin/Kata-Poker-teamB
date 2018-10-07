@@ -10,15 +10,15 @@ enum CardColor {
     SQUARE("Carre");
 	// @formatter:on
 
-    private String cardColor = "";
+    private String color = "";
 
-    CardColor(String CardColor) {
-        this.cardColor = CardColor;
+    CardColor(String color) {
+        this.color = color;
     }
 
     @Override
     public String toString() {
-        return this.cardColor;
+        return this.color;
     }
 
     public static CardColor getEnum(String strToEnum) {

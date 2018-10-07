@@ -105,7 +105,7 @@ class Referee {
 	 * @param winningPatternValue
 	 */
 	private void setWinnerMsg(int winner, CombinationType winningCombination, int winningPatternValue) {
-		winnerMsg = "La main " + winner + " gagne avec : " + winningCombination.toString() + winningPatternValue;
+		winnerMsg = "La main " + (winner+1) + " gagne avec : " + winningCombination.toString() + winningPatternValue;
 	}
 
 	private void setWinnerMsg() {

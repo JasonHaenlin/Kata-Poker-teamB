@@ -61,13 +61,12 @@ class Referee {
 	}
 
 	private boolean isPotentialWinnerExist() {
-		if (hand1.getType() == CombinationType.HIGHESTCARD) {
+		if (hand1.getType() == CombinationType.HIGHESTCARD)
 			return !(hand1.isEmpty() || hand2.isEmpty());
-		} else {
-			hand1.removeAdvancedPatterns();
-			hand2.removeAdvancedPatterns();
-			return true;
-		}
+		hand1.removeAdvancedPatterns();
+		hand2.removeAdvancedPatterns();
+		return true;
+
 	}
 
 	private int setTheResult(boolean verdict) {
@@ -102,7 +101,7 @@ class Referee {
 	 * @param winningPatternValue
 	 */
 	private void setWinnerMsg(int winner, CombinationType winningCombination, int winningPatternValue) {
-		winnerMsg = "La main " + (winner+1) + " gagne avec : " + winningCombination.toString() + winningPatternValue;
+		winnerMsg = "La main " + (winner + 1) + " gagne avec : " + winningCombination.toString() + winningPatternValue;
 	}
 
 	private void setWinnerMsg() {

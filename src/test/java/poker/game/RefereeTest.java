@@ -216,7 +216,6 @@ public class RefereeTest {
         assertEquals(2, referee.establishTheWinner(hand1, hand2));
     }
 
-    @Ignore
     @Test
     public void tresholdCoefScoreThreeOfAKindToStraightTest() {
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "ACo", "ACa", "RTr", "VTr")));
@@ -225,7 +224,6 @@ public class RefereeTest {
         assertEquals(2, referee.establishTheWinner(hand1, hand2));
     }
 
-    @Ignore
     @Test
     public void tresholdCoefScoreStraightToColorTest() {
         hand1.buildNewHand(new ArrayList<>(Arrays.asList("10Pi", "VCo", "DCa", "RTr", "ATr")));

@@ -56,7 +56,7 @@ class Hand {
             popAndUpdateHighestCard();
             return CombinationType.HIGHESTCARD;
         }
-        if (isQuinteFlushDetected()){
+        if (isQuinteFlushDetected()) {
             return CombinationType.QUINTE_FLUSH;
         } else if (isFourOfAKindDetected()) {
             return CombinationType.FOUR_OF_A_KIND;
@@ -236,7 +236,7 @@ class Hand {
         return true;
     }
 
-    boolean isQuinteFlushDetected(){
+    boolean isQuinteFlushDetected() {
         return isColorDetected() && isStraight();
     }
 
@@ -296,7 +296,7 @@ class Hand {
     /**
      * Identify the pattern of the hand
      */
-    CombinationType getHandPattern() {
+    CombinationType computeHandPattern() {
         this.type = checkHandType();
         return this.type;
     }

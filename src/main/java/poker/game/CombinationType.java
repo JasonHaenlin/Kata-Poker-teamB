@@ -6,7 +6,7 @@ enum CombinationType {
 	PAIR(10,"Paire de "),
 	TWO_PAIR(100,"Double Paire de "),
 	THREE_OF_A_KIND(1000,"Triple de "),
-	STRAIGHT(2900,"Suite au "),
+	STRAIGHT(3100,"Suite au "),
 	COLOR(6800,"couleur avec "),
 	FULL(42000,"Full "),
 	FOUR_OF_A_KIND(330000,"Carre de "),

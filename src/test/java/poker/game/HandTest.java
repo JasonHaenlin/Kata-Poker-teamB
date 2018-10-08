@@ -214,6 +214,12 @@ public class HandTest {
         hand5.buildNewHand(new ArrayList<>(Arrays.asList("3Ca", "5Co", "6Pi", "4Pi", "2Tr")));
         assertEquals(true, hand5.isStraight());
         assertEquals(6, hand5.getPatternValue().getValue());
+        // Pair of highest card
+        hand6.buildNewHand(new ArrayList<>(Arrays.asList("ATr", "ACo", "RTr", "DTr", "VTr")));
+        assertEquals(false, hand6.isStraight());
+        // ThreeOfAKind of highest card
+        hand7.buildNewHand(new ArrayList<>(Arrays.asList("RTr", "RCo", "RCa", "DTr", "VTr")));
+        assertEquals(false, hand7.isStraight());
     }
 
     @Test

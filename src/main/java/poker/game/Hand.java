@@ -199,7 +199,7 @@ class Hand {
         int i = 0;
         while (cardInHand.get(i + 1).getIntValue() - cardInHand.get(i).getIntValue() == 1) {
 
-            if (cardInHand.get(i + 1).getIntValue() - max.getIntValue() == 0) {
+            if (cardInHand.get(i + 1).getIntValue() - max.getIntValue() == 0 && cardInHand.get(3).equals(cardInHand.get(i))) {
                 setPatternResult(max);
                 return true;
             }

@@ -6,8 +6,16 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * Main class of the game
  * 
+ * @author Ruben Houri
+ * @author Maxime Castellano
+ * @author Vincent Ung
+ * @author Jason Haenlin
+ * @see Referee
+ * @see Hand
  */
+
 public class Game {
 
     public enum Player {

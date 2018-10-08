@@ -1,5 +1,22 @@
 package poker.game;
 
+/**
+ * <p>
+ * Card object used to build a new Card
+ * </p>
+ * <p>
+ * Each card need a color from <strong>CardColor</strong> and a value from
+ * <strong>CardValue</strong>
+ * </p>
+ * 
+ * @author Ruben Houri
+ * @author Maxime Castellano
+ * @author Vincent Ung
+ * @author Jason Haenlin
+ * @see CardColor
+ * @see CardValue
+ */
+
 class Card {
 
     private CardValue value;

@@ -3,8 +3,14 @@ package poker.game;
 import poker.game.exception.CardDuplicationBetweenPlayerRuntimeException;
 
 /**
- * This class judge who is the winner
+ * 
+ * 
+ * @author Ruben Houri
+ * @author Maxime Castellano
+ * @author Vincent Ung
+ * @author Jason Haenlin
  */
+
 class Referee {
 
 	private String winnerMsg;

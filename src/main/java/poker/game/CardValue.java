@@ -2,6 +2,21 @@ package poker.game;
 
 import poker.game.exception.CardValueRuntimeException;
 
+/**
+ * <p>
+ * This class provide a way to set a <strong>Card</strong> value
+ * </p>
+ * <p>
+ * Each value has a name using a string object and each card also has a int
+ * value to evaluate the strenght of a card
+ * <p>
+ * 
+ * @author Ruben Houri
+ * @author Maxime Castellano
+ * @author Vincent Ung
+ * @author Jason Haenlin
+ */
+
 enum CardValue {
     // @formatter:off   
     C_2("2",2),

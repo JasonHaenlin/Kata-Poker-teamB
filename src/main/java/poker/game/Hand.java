@@ -8,6 +8,20 @@ import poker.game.exception.CardDuplicationInHandRuntimeException;
 import poker.game.exception.CardWrongInputSizeRuntimeException;
 import poker.game.exception.WrongHandSizeRuntimeException;
 
+/**
+ * <p>
+ * Hand oject of cards and used to calculate the pattern of a given list of
+ * cards (5 cards)
+ * </p>
+ * 
+ * @author Ruben Houri
+ * @author Maxime Castellano
+ * @author Vincent Ung
+ * @author Jason Haenlin
+ * @see Card
+ * @see CombinationType
+ */
+
 class Hand {
 
     private static final int HAND_SIZE = 5;

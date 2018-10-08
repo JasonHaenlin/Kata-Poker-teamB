@@ -3,14 +3,13 @@ package poker.game;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import poker.game.exception.CardDuplicationBetweenPlayerRuntimeException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+
+import poker.game.exception.CardDuplicationBetweenPlayerRuntimeException;
 
 public class RefereeTest {
 

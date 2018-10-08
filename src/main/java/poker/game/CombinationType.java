@@ -1,5 +1,20 @@
 package poker.game;
 
+/**
+ * <p>
+ * This class list all the possible combination with a coefficient to compute
+ * the score regarding the pattern
+ * </p>
+ * <p>
+ * A string is given to print the details of a game
+ * </p>
+ * 
+ * @author Ruben Houri
+ * @author Maxime Castellano
+ * @author Vincent Ung
+ * @author Jason Haenlin
+ */
+
 enum CombinationType {
 	// @formatter:off
 	HIGHESTCARD(1,"Carte la plus haute "),

@@ -2,6 +2,16 @@ package poker.game;
 
 import poker.game.exception.CardColorRuntimeException;
 
+/**
+ * <p>
+ * This classe provide a set of <strong>color</strong> for a basic card game
+ * <p>
+ * 
+ * @author Ruben Houri
+ * @author Maxime Castellano
+ * @author Vincent Ung
+ * @author Jason Haenlin
+ */
 enum CardColor {
     // @formatter:off   
     HEART("Coeur"),

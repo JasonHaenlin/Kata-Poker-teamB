@@ -6,11 +6,11 @@ enum CombinationType {
 	PAIR(10,"Paire de "),
 	TWO_PAIR(100,"Double Paire de "),
 	THREE_OF_A_KIND(1000,"Triple de "),
-	STRAIGHT(10000,"Suite au "),
-	COLOR(11000,"couleur avec "),
-	FULL(12000,"Full "),
-	FOUR_OF_A_KIND(13000,"Carre de "),
-	QUINTE_FLUSH(200000,"Quinte flush de ");
+	STRAIGHT(2900,"Suite au "),
+	COLOR(6800,"couleur avec "),
+	FULL(42000,"Full "),
+	FOUR_OF_A_KIND(330000,"Carre de "),
+	QUINTE_FLUSH(925000,"Quinte flush de ");
 	// @formatter:on
 
 	private String typeOfHand = "";

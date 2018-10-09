@@ -26,7 +26,7 @@ Fichiers livrés :
 
 
 B-specs.xls
-ReadMe.txt
+README.txt
 src/
 ----main/
 --------java

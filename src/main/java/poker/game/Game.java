@@ -65,7 +65,7 @@ public class Game {
 
     private ArrayList<String> readEntry(int player) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Joueur " + player + ": veuillez saisir une main");
+        System.out.print("Main " + player + ":  ");
         return new ArrayList<>(Arrays.asList(sc.nextLine().split(" ")));
     }
 }

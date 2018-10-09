@@ -107,11 +107,11 @@ class Referee {
 	 * @param winningPatternValue
 	 */
 	private void setWinnerMsg(int winner, CombinationType winningCombination, String winningPatternValue) {
-		winnerMsg = "La main " + (winner + 1) + " gagne avec : " + winningCombination.toString() + winningPatternValue;
+		winnerMsg = "La main " + (winner + 1) + " gagne avec " + winningCombination.toString() + winningPatternValue;
 	}
 
 	private void setWinnerMsg() {
-		winnerMsg = "Egalité des mains";
+		winnerMsg = "Egalite";
 	}
 
 	public void checkForDuplicateCards(Hand hand1, Hand hand2) {

@@ -79,7 +79,7 @@ class Referee {
 		if (verdict) {
 			int player = winnerHand.getHandNumber();
 			CombinationType comb = winnerHand.getType();
-			int combType = winnerHand.getPatternValue().getValue();
+			String combType = winnerHand.getPatternValue().toString();
 			setWinnerMsg(player, comb, combType);
 			return player;
 		}
@@ -106,7 +106,7 @@ class Referee {
 	 * @param winningCombination
 	 * @param winningPatternValue
 	 */
-	private void setWinnerMsg(int winner, CombinationType winningCombination, int winningPatternValue) {
+	private void setWinnerMsg(int winner, CombinationType winningCombination, String winningPatternValue) {
 		winnerMsg = "La main " + (winner + 1) + " gagne avec : " + winningCombination.toString() + winningPatternValue;
 	}
 

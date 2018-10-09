@@ -2,6 +2,11 @@ package poker.game.exception;
 
 /**
  * CardValueRuntimeException
+ *
+ * @author Ruben Houri
+ * @author Maxime Castellano
+ * @author Vincent Ung
+ * @author Jason Haenlin
  */
 public class CardValueRuntimeException extends RuntimeException {
 

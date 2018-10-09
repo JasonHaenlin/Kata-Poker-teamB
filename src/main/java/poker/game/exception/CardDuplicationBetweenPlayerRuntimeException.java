@@ -2,6 +2,11 @@ package poker.game.exception;
 
 /**
  * CardDuplicationBetweenPlayerRuntimeException
+ *
+ * @author Ruben Houri
+ * @author Maxime Castellano
+ * @author Vincent Ung
+ * @author Jason Haenlin
  */
 public class CardDuplicationBetweenPlayerRuntimeException extends RuntimeException {
 

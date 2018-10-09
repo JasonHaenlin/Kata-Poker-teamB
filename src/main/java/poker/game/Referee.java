@@ -4,6 +4,7 @@ import poker.game.exception.CardDuplicationBetweenPlayerRuntimeException;
 
 /**
  * 
+ * Referee class, decides of the winner
  * 
  * @author Ruben Houri
  * @author Maxime Castellano

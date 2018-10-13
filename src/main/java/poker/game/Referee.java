@@ -52,7 +52,6 @@ class Referee {
 		if (hand.getPatternValueExtra() != null)
 			extra = hand.getPatternValueExtra().getValue();
 		return (pattern * value) + (pattern / 10 * extra);
-
 	}
 
 	private int resultOfTheReferee() {
